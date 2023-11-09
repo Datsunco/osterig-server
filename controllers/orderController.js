@@ -1,10 +1,13 @@
-const proxyService = require('../service/proxyService')
+const orderService = require('../service/orderService')
+const cartService = require('../service/cartService')
 
-class ProxyController{
-    async parse_data(req, res, next){
+class OrderController{
+    async create(req, res, next){
         try{
-            const catalogId = req.params.link;
-            const data = await proxyService.parse_data(catalogId)
+            const userId = req.user.id
+            const device = await cartService.getCart(userId)
+
+            const data = await orderService.createOrder(userId, device)
             return res.json(data)
         } catch (e){
             next(e)
@@ -24,4 +27,4 @@ class ProxyController{
     }
 }
 
-module.exports = new ProxyController();
+module.exports = new OrderController();
