@@ -1,10 +1,10 @@
 const Router = require('express').Router;
-const proxyController = require('../controllers/proxyContorller');
+const orderController = require('../controllers/orderController') 
 const router = new Router();
 const authMiddleware = require('../middlewares/authMiddleware')
 
-router.get('/parse/:link', proxyController.parse_data);
-router.get('/search/:keyword', proxyController.search_data);
+router.post('/create', authMiddleware, orderController.create);
+router.get('/get', authMiddleware, orderController.search_data);
 //router.get('/users', authMiddleware, userController.getUsers);
 
 

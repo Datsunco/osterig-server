@@ -25,6 +25,7 @@ class FavoritesService{
         }
 
         
+        
         const deviceData = await favoriteDeviceModel.create({
             favoritesDevice: favorite,
             deviceId: device,
@@ -32,6 +33,7 @@ class FavoritesService{
         })
         return deviceData
     }
+
 
     async removeFavorite(favorite, device, type){
         const candidate = await favoriteDeviceModel.findOne({favoritesDevice: favorite, deviceId: device,typeId: type})
