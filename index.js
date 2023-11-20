@@ -10,6 +10,10 @@ const errorMiddleware = require('./middlewares/errorMiddleware')
 const POPT = process.env.PORT || 5000 
 const app = express()
 
+const connectDB = require("./connectMongo");
+
+connectDB();
+
 
 app.use(cors({
     credentials: true,
@@ -27,10 +31,10 @@ app.get('/', (req, res) => {
 
 const start = async () =>{
     try{
-        await mongoose.connect(process.env.DB_URL, {
-             useNewUrlParser: true,
-             useUnifiedTopology: true
-         })
+        // await mongoose.connect(process.env.DB_URL, {
+        //      useNewUrlParser: true,
+        //      useUnifiedTopology: true
+        //  })
         app.listen(POPT, () => console.log(`server startted on port ${POPT}`))
     } catch (e){
         console.log('penis')
