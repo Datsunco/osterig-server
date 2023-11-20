@@ -32,6 +32,7 @@ const start = async () =>{
          })
         app.listen(POPT, () => console.log(`server startted on port ${POPT}`))
     } catch (e){
+        console.log('penis')
         console.log(e)
     }
 }
