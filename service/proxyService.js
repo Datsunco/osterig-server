@@ -126,6 +126,7 @@ class ProxyService{
 
         return data;
     }
+    
 
     async parse_hot() {
         const { status, data } = await axios.request({
