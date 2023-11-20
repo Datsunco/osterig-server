@@ -3,8 +3,63 @@ const proxyService = require('../service/proxyService')
 class ProxyController{
     async parse_data(req, res, next){
         try{
+            const params = JSON.parse(req.params.selected);
             const catalogId = req.params.link;
-            const data = await proxyService.parse_data(catalogId)
+            const data = await proxyService.parse_data(catalogId, params)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
+    async parse_params(req, res, next){
+        try{
+            const params = JSON.parse(req.params.selected);
+            const catalogId = req.params.link;
+            const data = await proxyService.parse_params(catalogId, params)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
+    async parse_product(req, res, next){
+        try{
+            const productCode = req.params.link;
+            const data = await proxyService.parse_product(productCode)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
+    async parse_same_product(req, res, next){
+        try{
+            const productCode = req.params.link;
+            const data = await proxyService.parse_same_product(productCode)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
+    async parse_hot(req, res, next){
+        try{
+            const data = await proxyService.parse_hot()
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
+    async parse_catalogs(req, res, next){
+        try{
+            const data = await proxyService.parse_catalogs()
             return res.json(data)
         } catch (e){
             next(e)
