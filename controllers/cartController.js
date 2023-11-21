@@ -18,7 +18,7 @@ class CartContoller{
         const cartId = req.user.id
         const {productModel, catalogId, count, productCode, brandNameEn, productImageUrl, price, minCount} = req.body
 
-        const device = await cartService.addDevice(productModel, catalogId, count, productCode, brandNameEn, productImageUrl, price, minCount)
+        const device = await cartService.addDevice(cartId, productModel, catalogId, count, productCode, brandNameEn, productImageUrl, price, minCount)
         return res.json(device)
         } catch (e){
             console.log('errro')
