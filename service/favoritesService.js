@@ -19,7 +19,7 @@ class FavoritesService{
         const candidate = await favoriteDeviceModel.findOne({
             favoritesDevice: favoritestId,
             productModel,
-            typeId,
+            catalogId,
         })
         console.log(candidate)
         if (candidate){
