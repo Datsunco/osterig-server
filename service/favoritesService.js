@@ -44,13 +44,21 @@ class FavoritesService{
     }
 
 
-    async removeFavorite(favorite, device, type){
-        const candidate = await favoriteDeviceModel.findOne({favoritesDevice: favorite, deviceId: device,typeId: type})
+    async removeFavorite(favorite, productModel, catalogId){
+        const candidate = await favoriteDeviceModel.findOne({
+            favoritesDevice: favorite,
+            productModel,
+            catalogId
+        })
         if (!candidate){
             throw ApiError.BadRequest(`Товара нет в избранном`)
         }
 
-        const deviceData = await favoriteDeviceModel.deleteOne({favoritesDevice: favorite, deviceId: device,typeId: type})
+        const deviceData = await favoriteDeviceModel.deleteOne({
+            favoritesDevice: favorite,
+            productModel,
+            catalogId
+        })
         return deviceData
     }
 }
