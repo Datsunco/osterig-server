@@ -16,9 +16,9 @@ class CartContoller{
         try {
             console.log('check')
         const cartId = req.user.id
-        const {deviceId, typeId, count} = req.body
+        const {productModel, catalogId, count, productCode, brandNameEn, productImageUrl, price, minCount} = req.body
 
-        const device = await cartService.addDevice(cartId, deviceId, typeId, count)
+        const device = await cartService.addDevice(productModel, catalogId, count, productCode, brandNameEn, productImageUrl, price, minCount)
         return res.json(device)
         } catch (e){
             console.log('errro')
@@ -29,11 +29,9 @@ class CartContoller{
     async removeDevice(req, res, next){
         try{
             const cartId = req.user.id
-            const {deviceId, typeId, count} = req.body
-            console.log(cartId)
-            console.log(deviceId, typeId, count)
+            const {productModel, catalogId, count} = req.body
         
-            const device = await cartService.removeDevice(cartId, deviceId, typeId, count)
+            const device = await cartService.removeDevice(cartId, productModel, catalogId, count)
             return res.json(device)
         } catch (e){
             next(e)

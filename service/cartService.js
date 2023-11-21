@@ -15,8 +15,8 @@ class CartService{
         return devices
     }
 
-    async addDevice(cart, device, type, count){
-        const candidate = await cartDeviceModel.findOne({CartDevice: cart, deviceId: device,typeId: type})
+    async addDevice(cart, productModel, catalogId, count, productCode, brandNameEn, productImageUrl, price, minCount){
+        const candidate = await cartDeviceModel.findOne({CartDevice: cart, productModel, catalogId})
         if (candidate){
             throw ApiError.BadRequest(`Такой товар уже лежит в коризне`)
         }
@@ -24,16 +24,21 @@ class CartService{
 
         const deviceData = await cartDeviceModel.create({
             CartDevice: cart,
-            deviceId: device,
-            typeId: type,
-            count: count
+            productModel,
+            catalogId, 
+            count, 
+            productCode, 
+            brandNameEn, 
+            productImageUrl, 
+            price, 
+            minCount
         })
         return deviceData
     }
 
 
-    async removeDevice(cart, device, type, count){
-        const candidate = await cartDeviceModel.findOne({CartDevice: cart, deviceId: device,typeId: type})
+    async removeDevice(cart, productModel, catalogId, count){
+        const candidate = await cartDeviceModel.findOne({CartDevice: cart, productModel, catalogId})
         if (!candidate){
             throw ApiError.BadRequest(`Товара в корзине нет`)
         }
@@ -43,7 +48,7 @@ class CartService{
             return candidate.save()
         }
 
-        const deviceData = await cartDeviceModel.deleteOne({CartDevice: cart, deviceId: device,typeId: type})
+        const deviceData = await cartDeviceModel.deleteOne({CartDevice: cart, productModel, catalogId})
         return deviceData
     }
 }
