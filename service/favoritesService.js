@@ -15,7 +15,7 @@ class FavoritesService{
         return devices
     }
 
-    async addFavorite(favoritestId, productModel, catalogId, productCode, productImageUrl, price, minCount){
+    async addFavorite(favoritestId, productModel, catalogId, productCode, brandNameEn, productImageUrl, price, minCount){
         const candidate = await favoriteDeviceModel.findOne({
             favoritesDevice: favoritestId,
             productModel,
@@ -35,6 +35,7 @@ class FavoritesService{
             productModel,
             catalogId,
             productCode,
+            brandNameEn,
             productImageUrl,
             price,
             minCount
