@@ -15,9 +15,9 @@ class FavoritesController{
     async addFavorite(req, res, next){
         try{
             const favoritestId = req.user.id
-            const {deviceId, typeId} = req.body
+            const {productModel, typeId, productCode, productImageUrl, price, minCount} = req.body
 
-            const device = await favoritesService.addFavorite(favoritestId, deviceId, typeId)
+            const device = await favoritesService.addFavorite(favoritestId, productModel, typeId, productCode, productImageUrl, price, minCount)
             return res.json(device)
         } catch(e){
             next(e)

@@ -15,8 +15,12 @@ class FavoritesService{
         return devices
     }
 
-    async addFavorite(favorite, device, type){
-        const candidate = await favoriteDeviceModel.findOne({favoritesDevice: favorite, deviceId: device,typeId: type})
+    async addFavorite(favoritestId, productModel, typeId, productCode, productImageUrl, price, minCount){
+        const candidate = await favoriteDeviceModel.findOne({
+            favoritesDevice: favoritestId,
+            productModel,
+            typeId,
+        })
         console.log(candidate)
         if (candidate){
             candidate.deleteOne()
@@ -27,9 +31,13 @@ class FavoritesService{
         
         
         const deviceData = await favoriteDeviceModel.create({
-            favoritesDevice: favorite,
-            deviceId: device,
-            typeId: type,
+            favoritesDevice: favoritestId,
+            productModel,
+            typeId,
+            productCode,
+            productImageUrl,
+            price,
+            minCount
         })
         return deviceData
     }
