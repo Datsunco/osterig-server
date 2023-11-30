@@ -77,6 +77,17 @@ class ProxyController{
         }
         
     }
+
+    async onlevel_data(req, res, next){
+        try{
+            const keyword = req.params.keyword;
+            const data = await proxyService.onlevel_data(keyword)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
 }
 
 module.exports = new ProxyController();

@@ -172,6 +172,21 @@ class ProxyService{
 
         return data;
     }
+
+    async onlevel_data(keyword) {
+        const { status, data } = await axios.request({
+            url: `https://wmsc.lcsc.com/wmsc/product/catalog/menu/onelevel?catalogId=${keyword}`,
+            method: 'get',
+            headers: this.header
+        });
+        
+
+	if (status !== 200) {
+            throw ApiError.BadRequest();
+        }
+
+        return data;
+    }
 }
 
 module.exports = new ProxyService();
