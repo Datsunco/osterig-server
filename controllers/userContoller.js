@@ -70,8 +70,10 @@ class UserController {
                 sameSite: 'none',
                 secure: true
               })
+            console.log(userData)
             return res.json(userData);
         } catch (e) {
+            console.log(e)
             next(e);
         }
     }
