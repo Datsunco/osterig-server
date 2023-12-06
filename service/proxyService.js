@@ -181,7 +181,22 @@ class ProxyService{
         });
         
 
-	if (status !== 200) {
+	    if (status !== 200) {
+            throw ApiError.BadRequest();
+        }
+
+        return data;
+    }
+
+    async pre_data(keyword) {
+        const { status, data } = await axios.request({
+            url: `https://wmsc.lcsc.com/wmsc/search/pre?keyword=${keyword}`,
+            method: 'get',
+            headers: this.header
+        });
+        
+
+	    if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
