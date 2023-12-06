@@ -3,7 +3,7 @@ const tokenService = require('../service/tokenService');
 
 module.exports = function (req, res, next) {
     try {
-        console.log(authorizationHeader)
+        console.log(req.headers.authorization)
         const authorizationHeader = req.headers.authorization;
         if (!authorizationHeader) {
             console.log(1)
