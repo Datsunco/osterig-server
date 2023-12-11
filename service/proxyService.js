@@ -206,7 +206,7 @@ class ProxyService{
     async pre_link(type, keyword) {
         const { status, data } = await axios.request({
             // https://wmsc.lcsc.com/wmsc/search/pre/link?type=LCSC+Part+Number&keyword=C286660
-            url: `https://wmsc.lcsc.com/wmsc/search/pre/link?type=${type}?keyword=${keyword}`,
+            url: `https://wmsc.lcsc.com/wmsc/search/pre/link?type=${type}&keyword=${keyword}`,
             method: 'get',
             headers: this.header
         });
