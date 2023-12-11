@@ -202,6 +202,22 @@ class ProxyService{
 
         return data;
     }
+
+    async pre_link(type, keyword) {
+        const { status, data } = await axios.request({
+            // https://wmsc.lcsc.com/wmsc/search/pre/link?type=LCSC+Part+Number&keyword=C286660
+            url: `https://wmsc.lcsc.com/wmsc/search/pre/link?type=${type}?keyword=${keyword}`,
+            method: 'get',
+            headers: this.header
+        });
+        
+
+	    if (status !== 200) {
+            throw ApiError.BadRequest();
+        }
+
+        return data;
+    }
 }
 
 module.exports = new ProxyService();

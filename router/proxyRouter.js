@@ -12,6 +12,8 @@ router.get('/hotparse', proxyController.parse_hot);
 router.get('/search/:keyword', proxyController.search_data);
 router.get('/onlevel/:keyword', proxyController.onlevel_data);
 router.get('/pre/:keyword', proxyController.pre_data);
+router.get('/pre/link/:type/:keyword', proxyController.pre_data);
+
 //router.get('/users', authMiddleware, userController.getUsers);
 
 module.exports = router

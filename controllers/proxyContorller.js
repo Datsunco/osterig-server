@@ -99,6 +99,18 @@ class ProxyController{
         }
         
     }
+
+    async pre_link(req, res, next){
+        try{
+            const keyword = req.params.keyword;
+            const type = req.params.type;
+            const data = await proxyService.pre_link(type, keyword)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
 }
 
 module.exports = new ProxyController();
