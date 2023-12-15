@@ -16,7 +16,7 @@ connectDB();
 
 app.use(cors({
     credentials: true,
-    origin: process.env.CLIENT_URL
+    origin: [process.env.CLIENT_URL, process.env.LOCALHOST_URL]
 }))
 app.use(express.json())
 app.use(cookieParser())
