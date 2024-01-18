@@ -15,10 +15,10 @@ class OrderController{
         
     }
 
-    async search_data(req, res, next){
+    async getOrders(req, res, next){
         try{
-            const keyword = req.params.keyword;
-            const data = await proxyService.search_data(keyword)
+            const userId = req.user.id
+            const data = await orderService.getOrders(userId)
             return res.json(data)
         } catch (e){
             next(e)
