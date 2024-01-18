@@ -4,7 +4,7 @@ const router = new Router();
 const authMiddleware = require('../middlewares/authMiddleware')
 
 router.post('/create', authMiddleware, orderController.create);
-router.get('/get', authMiddleware, orderController.search_data);
+router.get('/get', authMiddleware, orderController.getOrders);
 //router.get('/users', authMiddleware, userController.getUsers);
 
 
