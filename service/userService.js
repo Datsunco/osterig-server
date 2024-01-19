@@ -66,6 +66,7 @@ class UserService{
     }
 
     async refresh(refreshToken){
+        console.log(refreshToken)
         if (!refreshToken) {
             throw ApiError.UnauthorizedError()
         }
