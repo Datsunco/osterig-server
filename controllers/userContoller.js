@@ -29,7 +29,7 @@ class UserController {
             res.cookie('refreshToken', userData.refreshToken, {
                 maxAge: 14 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
-                sameSite: none
+                sameSite: false
               })
             return res.json(userData);
         } catch (e) {
