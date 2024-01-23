@@ -13,9 +13,11 @@ class DeliveryService {
             method: 'post',
         });
 
+        if (status !== 200) {
+            throw ApiError.BadRequest();
+        }
         console.log(status, data, "test")
-
-        return data
+        return data;
     }
 
 }
