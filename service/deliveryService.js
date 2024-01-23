@@ -29,7 +29,7 @@ class DeliveryService {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": 'application/json'
             };
-
+            console.log(headers)
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/calculator/tarifflist`,
                 method: 'post',
@@ -56,8 +56,9 @@ class DeliveryService {
                 },
             });
             console.log(data)
-
+            
             if (status !== 200) {
+                console.log(status)
                 throw ApiError.BadRequest();
             }
             return data;
