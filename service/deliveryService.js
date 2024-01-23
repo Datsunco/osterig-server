@@ -31,7 +31,7 @@ class DeliveryService {
 
         axios.post(`https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`).then((res) => {
             console.log(res)
-            return res.data;
+            return res;
         })
         console.log('test3')
         // const { status, data } = await axios.request({
