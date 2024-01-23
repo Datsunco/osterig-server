@@ -40,7 +40,7 @@ class DeliveryService {
             }
 
             const {status2, data2} = await axios.request({
-                body: body,
+                data: body,
                 headers: headers,
                 url: `https://api.cdek.ru/v2/calculator/tarifflist`,
                 method: 'post',
