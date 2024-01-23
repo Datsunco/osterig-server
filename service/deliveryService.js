@@ -17,63 +17,43 @@ class DeliveryService {
                 throw ApiError.BadRequest();
             }
 
-            var token = data.access_token
-            var headers = {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": 'application/json'
-            };
-            var body = {
-                "type": 1,
-                "date": "2020-11-03T11:49:32+0700",
-                "currency": 1,
-                "lang": "rus",
-                "from_location": {
-                    "address": "Балашиха"
-                },
-                "to_location": {
-                    "address": "Мытищи семашко 4 к 3"
-                },
-                "packages": [
-                    {
-                        "height": 10,
-                        "length": 10,
-                        "weight": 4000,
-                        "width": 10
-                    }
-                ]
-            }
+            // var token = data.access_token
+            // var headers = {
+            //     "Authorization": `Bearer ${token}`,
+            //     "Content-Type": 'application/json'
+            // };
 
-            const {response} = await axios.request({
-                data: {
-                    "type": 1,
-                    "date": "2020-11-03T11:49:32+0700",
-                    "currency": 1,
-                    "lang": "rus",
-                    "from_location": {
-                        "address": "Балашиха"
-                    },
-                    "to_location": {
-                        "address": "Мытищи семашко 4 к 3"
-                    },
-                    "packages": [
-                        {
-                            "height": 10,
-                            "length": 10,
-                            "weight": 4000,
-                            "width": 10
-                        }
-                    ]
-                },
-                headers: headers,
-                url: `https://api.cdek.ru/v2/calculator/tarifflist`,
-                method: 'post',
-            });
-            console.log(response)
+            // const {response} = await axios.request({
+            //     data: {
+            //         "type": 1,
+            //         "date": "2020-11-03T11:49:32+0700",
+            //         "currency": 1,
+            //         "lang": "rus",
+            //         "from_location": {
+            //             "address": "Балашиха"
+            //         },
+            //         "to_location": {
+            //             "address": "Мытищи семашко 4 к 3"
+            //         },
+            //         "packages": [
+            //             {
+            //                 "height": 10,
+            //                 "length": 10,
+            //                 "weight": 4000,
+            //                 "width": 10
+            //             }
+            //         ]
+            //     },
+            //     headers: headers,
+            //     url: `https://api.cdek.ru/v2/calculator/tarifflist`,
+            //     method: 'post',
+            // });
+            // console.log(response)
 
-            if (status !== 200) {
-                throw ApiError.BadRequest();
-            }
-            return response;
+            // if (status !== 200) {
+            //     throw ApiError.BadRequest();
+            // }
+            return data;
         } catch (e) {
             console.log(e)
         }
