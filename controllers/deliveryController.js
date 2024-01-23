@@ -4,7 +4,8 @@ const paymentService = require('../service/paymentService');
 class DevliveryController {
     async getTarrif(req, res, next) {
         try {
-            const data = await deliveryService.getTarrif()
+            const token = await deliveryService.getToken()
+            const data = await deliveryService.getTarrif(token)
             return res.json(data)
         } catch (e) {
             next(e)

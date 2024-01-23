@@ -6,9 +6,9 @@ const client_id = 'HeyDcTj6Et72w0WrcJTThpoAHl6YkZWP'
 const client_secret = 'sEAUDL4CfsPNR63oxaC072R2joMVpRB2'
 
 class DeliveryService {
-    async getTarrif() {
+    async getToken() {
         try {
-            const {status, data} = await axios.request({
+            const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`,
                 method: 'post',
             });
@@ -16,43 +16,50 @@ class DeliveryService {
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-            console.log(data.access_token)
-            // var token = data.access_token
-            // var headers = {
-            //     "Authorization": `Bearer ${token}`,
-            //     "Content-Type": 'application/json'
-            // };
+        
+            return data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
-            // const {response} = await axios.request({
-            //     data: {
-            //         "type": 1,
-            //         "date": "2020-11-03T11:49:32+0700",
-            //         "currency": 1,
-            //         "lang": "rus",
-            //         "from_location": {
-            //             "address": "Балашиха"
-            //         },
-            //         "to_location": {
-            //             "address": "Мытищи семашко 4 к 3"
-            //         },
-            //         "packages": [
-            //             {
-            //                 "height": 10,
-            //                 "length": 10,
-            //                 "weight": 4000,
-            //                 "width": 10
-            //             }
-            //         ]
-            //     },
-            //     headers: headers,
-            //     url: `https://api.cdek.ru/v2/calculator/tarifflist`,
-            //     method: 'post',
-            // });
-            // console.log(response)
+    async getTarrif(token) {
+        try {
+            var headers = {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": 'application/json'
+            };
 
-            // if (status !== 200) {
-            //     throw ApiError.BadRequest();
-            // }
+            const { status, data } = await axios.request({
+                url: `https://api.cdek.ru/v2/calculator/tarifflist`,
+                method: 'post',
+                headers: headers,
+                data: {
+                    "type": 1,
+                    "date": "2020-11-03T11:49:32+0700",
+                    "currency": 1,
+                    "lang": "rus",
+                    "from_location": {
+                        "address": "Балашиха"
+                    },
+                    "to_location": {
+                        "address": "Мытищи семашко 4 к 3"
+                    },
+                    "packages": [
+                        {
+                            "height": 10,
+                            "length": 10,
+                            "weight": 4000,
+                            "width": 10
+                        }
+                    ]
+                },
+            });
+            console.log(data)
+
+            if (status !== 200) {
+                throw ApiError.BadRequest();
+            }
             return data;
         } catch (e) {
             console.log(e)
