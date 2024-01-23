@@ -56,10 +56,10 @@ class DeliveryService {
                 },
             });
             console.log(data)
-            
+            console.log(status)
             if (status !== 200) {
                 console.log(status)
-                throw ApiError.BadRequest();
+                return false
             }
             return data;
         } catch (e) {
