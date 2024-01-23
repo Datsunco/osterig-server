@@ -13,7 +13,7 @@ class DeliveryService {
             method: 'post',
         });
 
-        console.log(status, data)
+        console.log(status, data, "test")
 
         return data
     }
