@@ -26,10 +26,10 @@ class DeliveryService {
     async getTarrif(token) {
         try {
             var headers = {
-                "Authorization": `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJvcmRlcjphbGwiLCJwYXltZW50OmFsbCJdLCJleHAiOjE3MDYwMjAzMjYsImF1dGhvcml0aWVzIjpbInNoYXJkLWlkOnJ1LTA0IiwiY29udHJhZ2VudC11dWlkOjExODI4NmRmLTljNjQtNGZhYS1hZjgyLTlhOTRiZjIyYmZkYyIsImFjY291bnQtdXVpZDoyYjkwNzU4Mi1kZjM4LTQ5MzctODZkMy1iZTkyN2ZiNTNlOTQiLCJjbGllbnQtZW1haWxzOnZvcmRncnVwcEB5YW5kZXgucnUiLCJjbGllbnQtaWQtZWM0Ojk3MzgyOTEiLCJjbGllbnQtY2l0eTrQpdC40LzQutC4LCDQnNC-0YHQutC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCIsImZ1bGwtbmFtZTrQkdCw0YDRhdCw0YLQvtCy0LAg0JDQvdC90LAg0K7RgNGM0LXQstC90LAiLCJhY2NvdW50LWxhbmc6cnVzIiwiY29udHJhY3Q60JjQnC3QoNCkLdCSN9CgLTU0IiwiYXBpLXZlcnNpb246MS4xIiwiY2xpZW50LWlkLWVjNToxMTgyODZkZi05YzY0LTRmYWEtYWY4Mi05YTk0YmYyMmJmZGMiLCJzb2xpZC1hZGRyZXNzOmZhbHNlIiwiY29udHJhY3QtaWQ6NzQwNjlkMWUtMDIwMC00YWJiLTg0NTAtZTE2ZjUxYTAyYzljIl0sImp0aSI6IkowbHNEWmRodXVmdGc1R1RnVGNQQkdDSVdkQSIsImNsaWVudF9pZCI6IkhleURjVGo2RXQ3MncwV3JjSlRUaHBvQUhsNllrWldQIn0.A5DxgPDzlmG1UjnQT-nwiDoHyniK5pX2xyFWLQximcpu-cyYPZfa24LpD4JRHezz9mdxaTyhsV23leFm03-Fm9vTZncYAl5GKP_5vVp65wzOsKmyyrp7NxkqX5pIjLIPw8R5itRcVXcjTVc2zb2YNwdHtnl-TQ_ZSAsyHdHAUPOEomnMKnYxGDtlsR7Hr8T7AG3xkP7N9ytTi5PrS-WvyUa3nkUHda4wEWkzg8gIE59N9pSeDWxv_l0lCPDoziwCY2QiWKzo8bRmKan6jMT4OZomCt5C7nLza1K3RQ7qPjktFyaXJJPCrLEhqHyErpZkVcS4F-5VsNvdAK4-4T4cog`,
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": 'application/json'
             };
-            console.log(headers)
+            
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/calculator/tarifflist`,
                 method: 'post',
@@ -55,15 +55,15 @@ class DeliveryService {
                     ]
                 },
             });
-            console.log(data)
-            console.log(status)
+            // console.log(data)
+            // console.log(status)
             if (status !== 200) {
-                console.log(status)
-                return false
+                throw ApiError.BadRequest();
             }
             return data;
         } catch (e) {
             console.log(e)
+            console.log(headers)
         }
     }
 
