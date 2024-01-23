@@ -39,17 +39,18 @@ class DeliveryService {
                 ]
             }
 
-            const {status2, data2} = await axios.request({
+            const {response} = await axios.request({
                 data: body,
                 headers: headers,
                 url: `https://api.cdek.ru/v2/calculator/tarifflist`,
                 method: 'post',
             });
+            console.log(response)
 
-            if (status !== 200 || status !== 200) {
+            if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-            return data2;
+            return response;
         } catch (e) {
             console.log(e)
         }
