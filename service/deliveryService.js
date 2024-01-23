@@ -16,7 +16,7 @@ class DeliveryService {
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-
+            console.log(data.access_token)
             // var token = data.access_token
             // var headers = {
             //     "Authorization": `Bearer ${token}`,
