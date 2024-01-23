@@ -27,6 +27,7 @@ class DeliveryService {
     }
         
     async getTarrif() {
+        console.log('test2')
         const { status, data } = await axios.request({
             url: `https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`,
             headers: this.header,
