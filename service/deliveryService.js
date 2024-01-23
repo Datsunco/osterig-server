@@ -40,13 +40,13 @@ class DeliveryService {
             method: 'post',
         });
 
-        console.log('test3', resp)
+        console.log('test3', resp?.data)
 
         // if (status !== 200) {
         //     throw ApiError.BadRequest();
         // }
         // console.log(status, data, "test")
-        return resp;
+        return resp?.data;
         }catch(e){
             console.log(e)
         }
