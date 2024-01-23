@@ -17,7 +17,7 @@ class DeliveryService {
                 throw ApiError.BadRequest();
             }
         
-            return data;
+            return data.access_token;
         } catch (e) {
             console.log(e)
         }
