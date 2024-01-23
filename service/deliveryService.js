@@ -29,22 +29,23 @@ class DeliveryService {
     async getTarrif() {
         console.log('test2')
 
-        axios.post(`https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`).then((res) => {
-            console.log(res)
-            return res;
-        })
-        console.log('test3')
-        // const { status, data } = await axios.request({
-        //     url: `https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`,
-        //     headers: this.header,
-        //     method: 'post',
-        // });
+        // axios.post(`https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`).then((res) => {
+        //     console.log(res)
+        //     return res;
+        // })
+        console.log('test2.5')
+        const resp = await axios.request({
+            url: `https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`,
+            method: 'post',
+        });
+
+        console.log('test3', resp)
 
         // if (status !== 200) {
         //     throw ApiError.BadRequest();
         // }
         // console.log(status, data, "test")
-        // return data;
+        return resp;
     }
 
 }
