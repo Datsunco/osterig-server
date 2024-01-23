@@ -65,7 +65,7 @@ class UserController {
             const userData = await userService.refresh(refreshToken);
             const thirty_days = 30 * 24 * 60 * 60 * 1000;
             res.cookie('refreshToken', userData.refreshToken, {
-                maxAge: 14 * 24 * 60 * 60 * 1000,
+                maxAge: thirty_days,
                 httpOnly: true, 
                 sameSite: 'none',
                 secure: true

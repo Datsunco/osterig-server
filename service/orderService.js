@@ -11,7 +11,6 @@ class OrderService{
 
     async getOrders(userId){
         const ordersData = await orderModel.find({order: userId})
-        console.log(ordersData)
 
         return ordersData
     }
