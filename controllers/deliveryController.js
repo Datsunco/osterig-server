@@ -5,7 +5,6 @@ class DevliveryController {
     async getTarrif(req, res, next) {
         try {
             const token = await deliveryService.getToken()
-            console.log(token)
             const data = await deliveryService.getTarrif(token)
             return res.json(data)
         } catch (e) {

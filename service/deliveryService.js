@@ -40,7 +40,7 @@ class DeliveryService {
                     "currency": 1,
                     "lang": "rus",
                     "from_location": {
-                        "address": "Балашиха"
+                        "address": "Москва, ул. Михалковская, дом 63Б строение 1, офис 3/1"
                     },
                     "to_location": {
                         "address": "Мытищи семашко 4 к 3"
@@ -55,15 +55,13 @@ class DeliveryService {
                     ]
                 },
             });
-            // console.log(data)
-            // console.log(status)
+
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
             return data;
         } catch (e) {
             console.log(e)
-            console.log(headers)
         }
     }
 
