@@ -27,6 +27,7 @@ class DeliveryService {
     }
         
     async getTarrif() {
+        try{
         console.log('test2')
 
         // axios.post(`https://api.cdek.ru/v2/oauth/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`).then((res) => {
@@ -39,13 +40,16 @@ class DeliveryService {
             method: 'post',
         });
 
-        console.log('test3', resp)
+        console.log('test3', resp?.data)
 
         // if (status !== 200) {
         //     throw ApiError.BadRequest();
         // }
         // console.log(status, data, "test")
-        return resp;
+        return resp?.data;
+        }catch(e){
+            console.log(e)
+        }
     }
 
 }

@@ -60,7 +60,7 @@ class ProxyService{
             }
         });
 
-        console.log(status, data)
+        console.log
 
 	if (status !== 200) {
             throw ApiError.BadRequest();
