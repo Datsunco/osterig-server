@@ -5,7 +5,7 @@ const paymentController = require('../controllers/paymentController');
 const authMiddleware = require('../middlewares/authMiddleware')
 
 
-router.get('/initial', authMiddleware, paymentController.initialPayment);
+router.post('/initial', paymentController.initialPayment);
 
 
 module.exports = router
