@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const axios = require('axios');
 
-const client_id = 'HeyDcTj6Et72w0WrcJTThpoAHl6YkZWP'
-const client_secret = 'sEAUDL4CfsPNR63oxaC072R2joMVpRB2'
+const client_id = process.env.CDEK_ID
+const client_secret = process.env.CDEK_SECRET
 
 class DeliveryService {
     async getToken() {

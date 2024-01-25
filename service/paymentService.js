@@ -7,10 +7,11 @@ class PaymentService {
         try{
         const my_url = "https://www.instagram.com/sprestay/";
         const initial_payment_msg = "Списываем оплату за заказ";
-        const authorization = "Bearer live_f1chMk0BicHwCrT5fypg5Kcf8Xn8SNNrNv-UwkswbBQ";
+        const authorization = process.env.UKASSA_SECRET;
         const url = "https://api.yookassa.ru/v3/payments";
         var headers = {
-            "Authorization": authorization,
+            "account_id": process.env.UKASSA_ID,
+            "secret_key": process.env.UKASSA_SECRET,
             "Idempotence-Key": uuid.v4().toString(),
             "Content-Type": 'application/json'
         };
