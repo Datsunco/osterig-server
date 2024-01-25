@@ -4,6 +4,7 @@ const axios = require('axios');
 
 class PaymentService {
     async initialPayment( price) {
+        try{
         const my_url = "https://www.instagram.com/sprestay/";
         const initial_payment_msg = "Списываем оплату за заказ";
         const authorization = "Basic live_f1chMk0BicHwCrT5fypg5Kcf8Xn8SNNrNv-UwkswbBQ";
@@ -29,28 +30,37 @@ class PaymentService {
             "save_payment_method": "false"
         };
         console.log("pre log")
-        axios.post(url, params, {
-            headers: headers,
-        }).then((res) => {
-            return res.data;
-        })
-            .then(async (res) => {
-                if (res.status == "pending") {
-                    console.log('change status ')
-                    // await orders.doc(order_id).update({ "payment_id": res.payment_method.id });
-                    return res.confirmation.confirmation_url
-                    response.send({
-                        "url": res.confirmation.confirmation_url,
-                    });
-                }
-            })
-            .catch((err) => {
-                functions.logger.log("ERROR", err);
-                response.send({
-                    "status": "error",
-                    "body": err,
-                });
-            });
+        const resp = await axios.post(url, params, {headers: headers})
+
+        if (resp.status != 200){
+            console.log('error')
+        }
+        // axios.post(url, params, {
+        //     headers: headers,
+        // }).then((res) => {
+        //     console.log(res)
+        //     return res.data;
+        // })
+            // .then(async (res) => {
+            //     if (res.status == "pending") {
+            //         console.log('change status ')
+            //         // await orders.doc(order_id).update({ "payment_id": res.payment_method.id });
+            //         return res.confirmation.confirmation_url
+            //         response.send({
+            //             "url": res.confirmation.confirmation_url,
+            //         });
+            //     }
+            // })
+            // .catch((err) => {
+            //     functions.logger.log("ERROR", err);
+            //     response.send({
+            //         "status": "error",
+            //         "body": err,
+            //     });
+            // });
+        }catch(e){
+            console.log(e)
+        }
         // return users
     }
 
