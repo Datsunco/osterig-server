@@ -12,7 +12,8 @@ class PaymentService {
         var headers = {
             // "account_id": process.env.UKASSA_ID,
             // "secret_key": process.env.UKASSA_SECRET,
-            "Authorization": `Basic  ${process.env.UKASSA_ID}:${process.env.UKASSA_SECRET}`,
+            // "Authorization": `Basic  ${process.env.UKASSA_ID}:${process.env.UKASSA_SECRET}`,
+            "Authorization": `Basic MzIyMDI1OmxpdmVfZjFjaE1rMEJpY0h3Q3JUNWZ5cGc1S2NmOFhuOFNOTnJOdi1Vd2tzd2JCUQ==`,
             "Idempotence-Key": uuid.v4().toString(),
             "Content-Type": 'application/json'
         };
