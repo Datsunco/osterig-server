@@ -7,7 +7,7 @@ class PaymentService {
         try{
         const my_url = "https://www.instagram.com/sprestay/";
         const initial_payment_msg = "Списываем оплату за заказ";
-        const authorization = "Basic live_f1chMk0BicHwCrT5fypg5Kcf8Xn8SNNrNv-UwkswbBQ";
+        const authorization = "Bearer live_f1chMk0BicHwCrT5fypg5Kcf8Xn8SNNrNv-UwkswbBQ";
         const url = "https://api.yookassa.ru/v3/payments";
         var headers = {
             "Authorization": authorization,
@@ -30,11 +30,12 @@ class PaymentService {
             "save_payment_method": "false"
         };
         console.log("pre log")
-        const resp = await axios.post(url, params, {headers: headers})
+        const { status, data } = await axios.post(url, params, {headers: headers})
 
-        if (resp.status != 200){
-            console.log('error')
+        if (status !== 200) {
+            throw ApiError.BadRequest();
         }
+        return data
         // axios.post(url, params, {
         //     headers: headers,
         // }).then((res) => {
