@@ -10,8 +10,9 @@ class PaymentService {
         const authorization = process.env.UKASSA_SECRET;
         const url = "https://api.yookassa.ru/v3/payments";
         var headers = {
-            "account_id": process.env.UKASSA_ID,
-            "secret_key": process.env.UKASSA_SECRET,
+            // "account_id": process.env.UKASSA_ID,
+            // "secret_key": process.env.UKASSA_SECRET,
+            "Authorization": `Bearer ${process.env.UKASSA_SECRET}`,
             "Idempotence-Key": uuid.v4().toString(),
             "Content-Type": 'application/json'
         };
