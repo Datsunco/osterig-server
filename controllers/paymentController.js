@@ -5,7 +5,7 @@ class PaymentController {
         try {
             const {userId, totalAmount, paymenttype} = req.body
             console.log(req?.body)
-            const resp = paymentService.initialPayment(totalAmount)
+            const resp = await paymentService.initialPayment(totalAmount)
             return res.json(resp)
             
             

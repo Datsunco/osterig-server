@@ -28,6 +28,7 @@ class PaymentService {
             "description": initial_payment_msg,
             "save_payment_method": "false"
         };
+        console.log("pre log")
         axios.post(url, params, {
             headers: headers,
         }).then((res) => {
