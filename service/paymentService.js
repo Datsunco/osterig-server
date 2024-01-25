@@ -3,10 +3,10 @@ const uuid = require('uuid')
 const axios = require('axios');
 
 class PaymentService {
-    async initialPayment(order_id, price) {
+    async initialPayment( price) {
         const my_url = "https://www.instagram.com/sprestay/";
         const initial_payment_msg = "Списываем оплату за заказ";
-        const authorization = "Basic ВАШ ТОКЕН";
+        const authorization = "Basic live_f1chMk0BicHwCrT5fypg5Kcf8Xn8SNNrNv-UwkswbBQ";
         const url = "https://api.yookassa.ru/v3/payments";
         var headers = {
             "Authorization": authorization,
@@ -35,7 +35,9 @@ class PaymentService {
         })
             .then(async (res) => {
                 if (res.status == "pending") {
-                    await orders.doc(order_id).update({ "payment_id": res.payment_method.id });
+                    console.log('change status ')
+                    // await orders.doc(order_id).update({ "payment_id": res.payment_method.id });
+                    return res.confirmation.confirmation_url
                     response.send({
                         "url": res.confirmation.confirmation_url,
                     });
@@ -48,7 +50,7 @@ class PaymentService {
                     "body": err,
                 });
             });
-        return users
+        // return users
     }
 
     async getOrder(orderId) {

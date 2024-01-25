@@ -3,8 +3,9 @@ const paymentService = require('../service/paymentService');
 class PaymentController {
     async initialPayment(req, res, next) {
         try {
+            const {userId, totalAmount, paymenttype} = req.body
             console.log(req?.body)
-            console.log(req?.body?.data)
+            const resp = paymentService.initialPayment(totalAmount)
             return res.json(req.body.data)
             
             
