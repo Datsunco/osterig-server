@@ -6,9 +6,9 @@ import { YooCheckout, ICreatePayment } from '@a2seven/yoo-checkout';
 class PaymentService {
     async initialPayment(price) {
         try {
-            
-            // const my_url = "https://www.instagram.com/sprestay/";
-            // const initial_payment_msg = "Списываем оплату за заказ";
+
+            const my_url = "https://www.instagram.com/sprestay/";
+            const initial_payment_msg = "Списываем оплату за заказ";
             // const authorization = process.env.UKASSA_SECRET;
             // const url = "https://api.yookassa.ru/v3/payments";
             // var headers = {
@@ -40,17 +40,19 @@ class PaymentService {
             const idempotenceKey = uuid.v4().toString();
 
             const createPayload = {
-                amount: {
-                    value: '2.00',
-                    currency: 'RUB'
+                "amount": {
+                    "value": price.toString(),
+                    "currency": "RUB"
                 },
-                payment_method_data: {
-                    type: 'bank_card'
+                "payment_method_data": {
+                    "type": "bank_card"
                 },
-                confirmation: {
-                    type: 'redirect',
-                    return_url: 'test'
-                }
+                "confirmation": {
+                    "type": "redirect",
+                    "return_url": my_url
+                },
+                "description": initial_payment_msg,
+                "save_payment_method": "false"
             };
 
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
