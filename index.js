@@ -13,8 +13,6 @@ const connectDB = require("./connectMongo");
 
 connectDB();
 
-
-
 app.use(cors({
     credentials: true,
     origin: [process.env.CLIENT_URL, process.env.LOCALHOST_URL]
