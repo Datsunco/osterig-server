@@ -8,7 +8,7 @@ class ProxyService{
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
             'cache-control': 'no-cache',
             'content-type': 'application/json;charset=UTF-8',
-            'cookie': 'area_type=overseas; _gid=GA1.2.293319881.1696425323; wmsc_cart_key=5827DB52BB7A49CA95B059FACF4F6DBD132A9A86AC81ED43C3311E03802593DD3AB6C6CA2C8DA1AE; action_track={"from":"https://web.telegram.org/","to":"/"}; _ga_98M84MKSZH=GS1.1.1696425334.1.1.1696425658.60.0.0; _ga=GA1.2.1006412231.1696425323; _gat_gtag_UA_98399433_1=1',
+            'cookie': 'wmsc_cart_key=531991F5FC7ACF9CCD68C7BA06639DC6FE0D9E5997ABB45D7C3DDBE8B1106B9C20654B061C28181C; _gcl_au=1.1.1037411912.1713687111; action_track={"from":"https://yandex.ru/","to":"/"}; _gid=GA1.2.702086745.1715761246; _clck=9hb9kf%7C2%7Cfls%7C0%7C1572; _uetsid=076ad2c0129411ef991815bbc1f87706; _uetvid=ce8fb300ffb611eea3638bbc882d59a5; _clsk=1tikkj1%7C1715761647756%7C13%7C1%7Cx.clarity.ms%2Fcollect; _ga=GA1.1.1220136030.1713687111; _ga_98M84MKSZH=GS1.1.1715761249.2.1.1715761892.60.0.0',
             'origin': 'https://www.lcsc.com',
             'pragma': 'no-cache',
             'referer': 'https://www.lcsc.com/',
