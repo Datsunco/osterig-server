@@ -43,7 +43,7 @@ class ProxyService{
         // const brandIdList = params[0].id
         
         const { status, data } = await axios.request({
-            url: 'https://wmsc.lcsc.com/wmsc/product/search/list',
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
             headers: this.header,
             data: {
@@ -74,7 +74,7 @@ class ProxyService{
         const tmp = this.parseParams(params)
         console.log(tmp)
         const { status, data } = await axios.request({
-            url: 'https://wmsc.lcsc.com/wmsc/product/search/param/group',
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/search/param/group',
             method: 'post',
             headers: this.header,
             data: {
@@ -100,7 +100,7 @@ class ProxyService{
 
     async parse_product(productCode) {
         const { status, data } = await axios.request({
-            url: `https://wmsc.lcsc.com/wmsc/product/detail?productCode=${productCode}`,
+            url: `https://wmsc.lcsc.com/ftps/wm/product/detail?productCode=${productCode}`,
             method: 'get',
             headers: this.header,
             
@@ -177,7 +177,7 @@ class ProxyService{
 
     async onlevel_data(keyword) {
         const { status, data } = await axios.request({
-            url: `https://wmsc.lcsc.com/wmsc/product/catalog/menu/onelevel?catalogId=${keyword}`,
+            url: `https://wmsc.lcsc.com/ftps/wm/product/catalog/menu/onelevel?catalogId=${keyword}`,
             method: 'get',
             headers: this.header
         });
@@ -192,7 +192,7 @@ class ProxyService{
 
     async pre_data(keyword) {
         const { status, data } = await axios.request({
-            url: `https://wmsc.lcsc.com/wmsc/search/pre?keyword=${keyword}`,
+            url: `https://wmsc.lcsc.com/ftps/wm/search/pre?keyword=${keyword}`,
             method: 'get',
             headers: this.header
         });
