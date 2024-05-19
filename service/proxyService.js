@@ -99,18 +99,20 @@ class ProxyService{
     }
 
     async parse_product(productCode) {
-        const { status, data } = await axios.request({
-            url: `https://wmsc.lcsc.com/ftps/wm/product/detail?productCode=${productCode}`,
-            method: 'get',
-            headers: this.header,
+    //     const { status, data } = await axios.request({
+    //         url: `https://wmsc.lcsc.com/ftps/wm/product/detail?productCode=${productCode}`,
+    //         method: 'get',
+    //         headers: this.header,
             
-        });
+    //     });
 
-	if (status !== 200) {
-            throw ApiError.BadRequest();
-        }
+	// if (status !== 200) {
+    //         throw ApiError.BadRequest();
+    //     }
 
-        return data;
+    //     return data;
+    console.log('del req')
+        return {data: 'test'}
     }
 
     async parse_same_product(productCode) {
@@ -154,7 +156,7 @@ class ProxyService{
         });
 
 	if (status !== 200) {
-        console.log('200 error detecct')//tmp
+        console.log('200 error detecct')//ytmp
             throw ApiError.BadRequest();
         }
 
