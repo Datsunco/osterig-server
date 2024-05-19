@@ -96,6 +96,7 @@ class ProxyController{
             const data = await proxyService.pre_data(keyword)
             return res.json(data)
         } catch (e){
+            // console.log(e)//tmp
             next(e)
         }
         
