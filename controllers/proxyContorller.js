@@ -27,10 +27,9 @@ class ProxyController{
 
     async parse_product(req, res, next){
         try{
-            console.log('test')
-            // const productCode = req.params.link;
-            // const data = await proxyService.parse_product(productCode)
-            return res.json('test')
+            const productCode = req.params.link;
+            const data = await proxyService.parse_product(productCode)
+            return res.json(data)
         } catch (e){
             next(e)
         }
