@@ -59,11 +59,24 @@ class UserController {
         }
     }
 
+    async userData(req, res, next) {
+        try {
+            const {refreshToken} = req.cookies;
+            const userData = await userService.userData(refreshToken);
+
+            console.log(userData)
+            return res.json(userData);
+        } catch (e) {
+            console.log(e)
+            next(e);
+        }
+    }
+
     async refresh(req, res, next) {
         try {
             const {refreshToken} = req.cookies;
-            const userData = await userService.refresh(refreshToken);
-            const thirty_days = 30 * 24 * 60 * 60 * 1000;
+            const userData = await userService.userData(refreshToken);
+            const thirty_days = 120 * 24 * 60 * 60 * 1000;
             res.cookie('refreshToken', userData.refreshToken, {
                 maxAge: thirty_days,
                 httpOnly: true, 
