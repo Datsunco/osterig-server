@@ -23,7 +23,7 @@ class DeliveryService {
         }
     }
 
-    async getTarrif(token) {
+    async getTarrif(address,token) {
         try {
             var headers = {
                 "Authorization": `Bearer ${token}`,
@@ -43,7 +43,7 @@ class DeliveryService {
                         "address": "Москва, ул. Михалковская, дом 63Б строение 1, офис 3/1"
                     },
                     "to_location": {
-                        "address": "Мытищи семашко 4 к 3"
+                        "address": address
                     },
                     "packages": [
                         {
