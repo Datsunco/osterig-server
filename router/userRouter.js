@@ -7,7 +7,7 @@ router.post('/registration', userController.registration);
 router.post('/login', userController.login);
 
 router.post('/logout', userController.logout);
-router.get('/data', userController.userData);
+router.get('/data', authMiddleware, userController.userData);
 router.get('/activate/:link', authMiddleware, userController.activate);
 router.get('/refresh', authMiddleware, userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);

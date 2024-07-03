@@ -13,6 +13,19 @@ class ProxyController{
         
     }
 
+    async parse_parsebypage(req, res, next){
+        try{
+            const params = JSON.parse(req.params.selected);
+            const catalogId = req.params.link;
+            const page = req.params.page;
+            const data = await proxyService.parse_parsebypage(catalogId, params, page)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
     async parse_params(req, res, next){
         try{
             const params = JSON.parse(req.params.selected);
