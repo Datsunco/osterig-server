@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 
 class OrderService{
     async createOrder(userId, device, paymentType){
-        const cartData = await orderModel.create({order: userId, deviceList: device})
+        
 
         
         const usd = await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`)
@@ -31,6 +31,7 @@ class OrderService{
         };
         
         try {
+            const cartData = await orderModel.create({order: userId, deviceList: device})
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
             console.log(payment);
 
