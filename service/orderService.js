@@ -58,14 +58,13 @@ class OrderService {
         checkout.cre
 
         try {
-            const orderData = await orderModel.create({ order: userId, deviceList: device })
+            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: 10})
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
             console.log(payment);
 
             // Обновляем заказ в базе данных с информацией о платеже
             orderData.paymentId = payment.id;
             orderData.idempotenceKey = idempotenceKey;
-            orderData.totalAmount = totalAmount;
             orderData.paymentType = paymentType;
             await orderData.save();
 
