@@ -14,6 +14,7 @@ class OrderController {
             const data = await orderService.createOrder(userId, device, paymentType)
             return res.json(data)
         } catch (e) {
+            console.log(e)
             next(e)
         }
 
