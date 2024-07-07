@@ -95,9 +95,10 @@ class OrderService {
                 }
             };
             const id = orderData.paymentId
-            console.log('paymentId', id)
+            
             const payment = await checkout.capturePayment(id, capturePayload, idempotenceKey);
             console.log(payment);
+            console.log('paymentId', id)
 
             if (payment.status === 'succeeded') {
                 // Обновляем статус заказа в базе данных
