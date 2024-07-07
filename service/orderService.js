@@ -12,8 +12,8 @@ class OrderService{
         
 
         
-        const usd = await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`).data.Valute['USD'].Value
-
+        const resp = await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`)
+        const usd = resp.data.Valute['USD'].Value
         // console.log("cart", device)
         console.log('usd', usd)
 
