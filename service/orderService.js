@@ -108,7 +108,7 @@ class OrderService {
 
             return payment;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             console.log('paymentId', id)
             throw new ApiError('Ошибка при подтверждении платежа', 500);
         }
