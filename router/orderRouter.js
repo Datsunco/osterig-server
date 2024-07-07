@@ -4,6 +4,7 @@ const router = new Router();
 const authMiddleware = require('../middlewares/authMiddleware')
 
 router.post('/create', authMiddleware, orderController.create);
+router.post('/confirm', authMiddleware, orderController.confirmPayment);
 router.get('/get', authMiddleware, orderController.getOrders);
 //router.get('/users', authMiddleware, userController.getUsers);
 

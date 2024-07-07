@@ -52,7 +52,7 @@ class OrderService {
             },
             confirmation: {
                 type: 'redirect',
-                return_url: 'https://osterrig-electronics.ru/return-url' // Укажите URL для возврата после оплаты
+                return_url: `https://osterrig-electronics.ru/orders/${idempotenceKey}` // Укажите URL для возврата после оплаты
             }
         };
         checkout.cre
@@ -66,6 +66,8 @@ class OrderService {
             orderData.paymentId = payment.id;
             orderData.idempotenceKey = idempotenceKey;
             orderData.paymentType = paymentType;
+            orderData.status = 'wait';
+            orderData.id = paymentType;
             await orderData.save();
 
             return {orderData, payment};
@@ -79,6 +81,34 @@ class OrderService {
         const ordersData = await orderModel.find({ order: userId })
 
         return ordersData
+    }
+
+    async confirmPayment(paymentId) {
+        const idempotenceKey = uuidv4(); // Генерируем уникальный ключ для подтверждения
+
+        try {
+            const capturePayload = {
+                amount: {
+                    value: '100.00', // Укажите сумму заказа
+                    currency: 'RUB'
+                }
+            };
+
+            const payment = await checkout.capturePayment(paymentId, capturePayload, idempotenceKey);
+            console.log(payment);
+
+            if (payment.status === 'succeeded') {
+                // Обновляем статус заказа в базе данных
+                const order = await orderModel.findOne({ idempotenceKey: paymentId });
+                order.status = 'paid';
+                await order.save();
+            }
+
+            return payment;
+        } catch (error) {
+            console.error(error);
+            throw new ApiError('Ошибка при подтверждении платежа', 500);
+        }
     }
 }
 

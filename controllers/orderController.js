@@ -30,6 +30,16 @@ class OrderController {
         }
 
     }
+
+    async confirmPayment(req, res, next) {
+        try {
+            const { paymentId } = req.body;
+            const data = await orderService.confirmPayment(paymentId);
+            return res.json(data);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 module.exports = new OrderController();
