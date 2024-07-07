@@ -68,7 +68,7 @@ class OrderService {
             orderData.paymentType = paymentType;
             await orderData.save();
 
-            return orderData;
+            return {orderData, payment};
         } catch (error) {
             console.error(error);
             throw new ApiError('Ошибка при создании платежа', 500);
