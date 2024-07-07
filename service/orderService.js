@@ -86,14 +86,16 @@ class OrderService {
         const idempotenceKey = uuidv4(); // Генерируем уникальный ключ для подтверждения
 
         try {
+           
+            const orderData = await orderModel.findOne({ idempotenceKey: paymentId });
             const capturePayload = {
                 amount: {
-                    value: '100.00', // Укажите сумму заказа
+                    value: orderData.totalAmount, // Укажите сумму заказа
                     currency: 'RUB'
                 }
             };
-            const orderData = await orderModel.findOne({ idempotenceKey: paymentId });
             const id = orderData.paymentId
+            console.log('paymentId', id)
             const payment = await checkout.capturePayment(id, capturePayload, idempotenceKey);
             console.log(payment);
 
