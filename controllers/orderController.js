@@ -4,7 +4,7 @@ const cartService = require('../service/cartService')
 class OrderController {
     async create(req, res, next) {
         try {
-            const { userId } = req.user
+            const userId = req.user.id
             const { totalAmount, paymentType} = req.body
 
             console.log(userId, totalAmount, paymentType)
