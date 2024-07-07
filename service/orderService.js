@@ -67,7 +67,6 @@ class OrderService {
             orderData.idempotenceKey = idempotenceKey;
             orderData.paymentType = paymentType;
             orderData.status = 'wait';
-            orderData.id = paymentType;
             await orderData.save();
 
             return {orderData, payment};
