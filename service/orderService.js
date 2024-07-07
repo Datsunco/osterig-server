@@ -4,6 +4,7 @@ const cartDeviceModel = require('../models/cart-device-model')
 const ApiError = require('../exceptions/apiError')
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios')
+const checkout =  require('./yoouKassaConfig')
 
 
 class OrderService{
@@ -11,7 +12,7 @@ class OrderService{
         
 
         
-        const usd = await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`)
+        const usd = await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`).data.Valute['USD']
 
         // console.log("cart", device)
         console.log('usd', usd)
