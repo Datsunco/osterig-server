@@ -3,6 +3,7 @@ const orderModel = require('../models/order-model')
 const cartDeviceModel = require('../models/cart-device-model')
 const ApiError = require('../exceptions/apiError')
 const { v4: uuidv4 } = require('uuid');
+const axios = require('axios')
 
 
 class OrderService{
