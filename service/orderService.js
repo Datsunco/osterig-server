@@ -92,14 +92,14 @@ class OrderService {
                     currency: 'RUB'
                 }
             };
-
-            const payment = await checkout.capturePayment(paymentId, capturePayload, idempotenceKey);
+            const orderData = await orderModel.findOne({ idempotenceKey: paymentId });
+            const id = orderData.paymentId
+            const payment = await checkout.capturePayment(id, capturePayload, idempotenceKey);
             console.log(payment);
 
             if (payment.status === 'succeeded') {
                 // Обновляем статус заказа в базе данных
-                const order = await orderModel.findOne({ idempotenceKey: paymentId });
-                order.status = 'paid';
+                orderData.status = 'paid';
                 await order.save();
             }
 
