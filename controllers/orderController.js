@@ -34,7 +34,7 @@ class OrderController {
     async confirmPayment(req, res, next) {
         try {
             const { idempotenceKey } = req.body;
-            const data = await orderService.confirmPayment(paymentId);
+            const data = await orderService.confirmPayment(idempotenceKey);
             return res.json(data);
         } catch (e) {
             next(e);
