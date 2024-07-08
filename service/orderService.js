@@ -103,7 +103,7 @@ class OrderService {
             if (payment.status === 'succeeded') {
                 // Обновляем статус заказа в базе данных
                 orderData.status = 'paid';
-                await order.save();
+                await orderData.save();
             }
 
             return payment;
