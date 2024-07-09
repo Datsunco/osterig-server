@@ -80,7 +80,6 @@ class OrderService {
                 return_url: `https://osterrig-electronics.ru/orders/${idempotenceKey}` // Укажите URL для возврата после оплаты
             }
         };
-        checkout.cre
 
         try {
             const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: 10})
@@ -90,7 +89,7 @@ class OrderService {
             // Обновляем заказ в базе данных с информацией о платеже
             orderData.paymentId = payment.id;
             orderData.idempotenceKey = idempotenceKey;
-            orderData.paymentType = paymentData.paymentType;
+            orderData.paymentData = paymentData;
             orderData.status = 'wait';
             await orderData.save();
 

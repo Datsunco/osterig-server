@@ -5,7 +5,7 @@ const OrderSchema = new Schema({
     deviceList: {type: Schema.Types.Array, required: true},
     paymentId: {type: String},
     totalAmount: {type: Number},
-    paymentType: {type: String},
+    paymentData: {type: Schema.Types.ObjectId,},
     idempotenceKey: {type:  String},
     status: {type: String}
 })
