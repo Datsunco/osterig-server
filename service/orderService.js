@@ -59,7 +59,7 @@ class OrderService {
         };
 
         try {
-            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: 10})
+            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: totalAmount})
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
             console.log(payment);
 
