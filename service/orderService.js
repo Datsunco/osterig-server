@@ -27,7 +27,7 @@ class OrderService {
                         description: item.productModel,
                         quantity: `${item.count}`,
                         amount: {
-                            value: item.price,
+                            value: (item.price * usd * 3).toFixed(3),
                             currency: "RUB"
                         },
                         vat_code: "4",
@@ -51,30 +51,7 @@ class OrderService {
             payment_method_data: {
                 type: 'bank_card'
             },
-            receipt: {
-                customer: {
-                    email: "danya200375@gmail.com"
-                },
-                items: [
-                    {
-                        description: "Топ трикотажный",
-                        quantity: "1.00",
-                        amount: {
-                            value: "10.00",
-                            currency: "RUB"
-                        },
-                        vat_code: "4",
-                        payment_mode: "full_prepayment",
-                        payment_subject: "marked",
-                        mark_mode: 0,
-                        // mark_code_info:
-                        // {
-                        //     "gs_1m": "DFGwNDY0MDE1Mzg2NDQ5MjIxNW9vY2tOelDFuUFwJh05MUVFMDYdOTJXK2ZaMy9uTjMvcVdHYzBjSVR3NFNOMWg1U2ZLV0dRMWhHL0UrZi8ydkDvPQ=="
-                        // },
-                        measure: "piece"
-                    }
-                ]
-            },
+            receipt: rec,
             confirmation: {
                 type: 'redirect',
                 return_url: `https://osterrig-electronics.ru/orders/${idempotenceKey}` // Укажите URL для возврата после оплаты
