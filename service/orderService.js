@@ -66,7 +66,12 @@ class OrderService {
             // Обновляем заказ в базе данных с информацией о платеже
             orderData.paymentId = payment.id;
             orderData.idempotenceKey = idempotenceKey;
-            orderData.paymentData = paymentData;
+            orderData.paymentType = paymentData.paymentType;
+            orderData.surname = paymentData.surname;
+            orderData.name = paymentData.name;
+            orderData.middlename = paymentData.middlename;
+            orderData.address = paymentData.address;
+            orderData.phone = paymentData.phone;
             orderData.status = 'wait';
             await orderData.save();
 
