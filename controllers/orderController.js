@@ -5,13 +5,13 @@ class OrderController {
     async create(req, res, next) {
         try {
             const userId = req.user.id
-            const { totalAmount, paymentType} = req.body
+            const { totalAmount, paymentData} = req.body
 
-            console.log(userId, totalAmount, paymentType)
+            console.log(userId, totalAmount, paymentData)
 
             const device = await cartService.getCart(userId)
 
-            const data = await orderService.createOrder(userId, device, paymentType)
+            const data = await orderService.createOrder(userId, totalAmount ,device, paymentData)
             return res.json(data)
         } catch (e) {
             console.log(e)

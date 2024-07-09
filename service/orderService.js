@@ -8,19 +8,44 @@ const checkout = require('./yoouKassaConfig')
 
 
 class OrderService {
-    async createOrder(userId, device, paymentType) {
+    async createOrder(userId, totalAmount ,device, paymentData) {
 
 
 
         const resp = await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`)
         const usd = resp.data.Valute['USD'].Value
-        // console.log("cart", device)
-        console.log('usd', usd)
+        console.log("cart", device)
+
+        const rec = {
+            customer: {
+                email: paymentData.email,
+
+            },
+            items: device.map((item) => {
+                return (
+                    {
+                        description: item.productModel,
+                        quantity: `${item.count}`,
+                        amount: {
+                            value: item.price,
+                            currency: "RUB"
+                        },
+                        vat_code: "4",
+                        payment_mode: "full_prepayment",
+                        payment_subject: "marked",
+                        mark_mode: 0,
+                        measure: "piece"
+                    }
+                )
+            })
+        }
+        console.log(rec)
+
 
         const idempotenceKey = uuidv4();; // Генерируйте уникальный ключ для каждого запроса
         const createPayload = {
             amount: {
-                value: '10.00', // Укажите сумму заказа
+                value: totalAmount, // Укажите сумму заказа
                 currency: 'RUB'
             },
             payment_method_data: {
@@ -65,7 +90,7 @@ class OrderService {
             // Обновляем заказ в базе данных с информацией о платеже
             orderData.paymentId = payment.id;
             orderData.idempotenceKey = idempotenceKey;
-            orderData.paymentType = paymentType;
+            orderData.paymentType = paymentData.paymentType;
             orderData.status = 'wait';
             await orderData.save();
 
