@@ -18,7 +18,7 @@ class OrderService {
 
         let reCountAmount = 0
         device.forEach(dev => {
-            reCountAmount += (item.price * usd * 3).toFixed() * item.count
+            reCountAmount += (dev.price * usd * 3).toFixed() * dev.count
         });
 
         const rec = {
