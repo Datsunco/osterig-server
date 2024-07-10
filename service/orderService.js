@@ -50,7 +50,7 @@ class OrderService {
         const idempotenceKey = uuidv4();; // Генерируйте уникальный ключ для каждого запроса
         const createPayload = {
             amount: {
-                value: totalAmount, // Укажите сумму заказа
+                value: reCountAmount, // Укажите сумму заказа
                 currency: 'RUB'
             },
             payment_method_data: {
@@ -64,7 +64,7 @@ class OrderService {
         };
 
         try {
-            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: totalAmount.toFixed() })
+            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: reCountAmount})
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
             console.log(payment);
 
