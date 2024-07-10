@@ -6,6 +6,7 @@ const OrderSchema = new Schema({
     paymentId: {type: String},
     totalAmount: {type: Number},
     paymentType: {type:  String},
+    deliveryType: {type:  String},
     surname: {type:  String},
     name: {type:  String},
     middlename: {type:  String},
