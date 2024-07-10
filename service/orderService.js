@@ -8,7 +8,7 @@ const checkout = require('./yoouKassaConfig')
 
 
 class OrderService {
-    async createOrder(userId, totalAmount ,device, paymentData) {
+    async createOrder(userId, totalAmount, device, paymentData) {
 
 
 
@@ -59,7 +59,7 @@ class OrderService {
         };
 
         try {
-            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: totalAmount})
+            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: totalAmount })
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
             console.log(payment);
 
@@ -76,7 +76,7 @@ class OrderService {
             orderData.status = 'wait';
             await orderData.save();
 
-            return {orderData, payment};
+            return { orderData, payment };
         } catch (error) {
             console.error(error);
             throw new ApiError('Ошибка при создании платежа', 500);
@@ -95,7 +95,7 @@ class OrderService {
         const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
         const channelId = '-1002248890601';
         try {
-           
+
             const orderData = await orderModel.findOne({ idempotenceKey: paymentId });
             const capturePayload = {
                 amount: {
@@ -107,17 +107,16 @@ class OrderService {
             console.log('paymentId', id)
             const payment = await checkout.capturePayment(id, capturePayload, idempotenceKey);
             console.log(payment);
-            
+
 
             if (payment.status === 'succeeded') {
                 // Обновляем статус заказа в базе данных
                 orderData.status = 'paid';
                 await orderData.save();
-            }
 
-            const telegramPayload = {
-                chat_id: channelId,
-                text: `
+                const telegramPayload = {
+                    chat_id: channelId,
+                    text: `
                     Заказ номер ${orderData?._id ?? 'hz'}
                     Cумма заказа: ${orderData?.totalAmount ?? 'hz'}
                     Тип доставки: ${orderData?.deliveryType ?? 'hz'}
@@ -137,10 +136,10 @@ class OrderService {
                         )
                     }))}
                     `,
-                parse_mode: 'HTML'
-            };
-            await axios.post(telegramApiUrl, telegramPayload);
-
+                    parse_mode: 'HTML'
+                };
+                await axios.post(telegramApiUrl, telegramPayload);
+            }
             return payment;
         } catch (error) {
             console.error(error);
