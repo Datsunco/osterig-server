@@ -16,6 +16,11 @@ class OrderService {
         const usd = resp.data.Valute['USD'].Value
         console.log("cart", device)
 
+        let reCountAmount = 0
+        device.forEach(dev => {
+            reCountAmount += (item.price * usd * 3).toFixed() * item.count
+        });
+
         const rec = {
             customer: {
                 email: paymentData.email,
@@ -27,7 +32,7 @@ class OrderService {
                         description: item.productModel,
                         quantity: `${item.count}`,
                         amount: {
-                            value: (item.price * usd * 3).toFixed(3),
+                            value: (item.price * usd * 3).toFixed(),
                             currency: "RUB"
                         },
                         vat_code: "4",
@@ -59,7 +64,7 @@ class OrderService {
         };
 
         try {
-            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: totalAmount })
+            const orderData = await orderModel.create({ order: userId, deviceList: device, totalAmount: totalAmount.toFixed() })
             const payment = await checkout.createPayment(createPayload, idempotenceKey);
             console.log(payment);
 
