@@ -165,8 +165,6 @@ class ProxyService{
             method: 'post',
             headers: this.header,
             data: {
-                'currentPage': 1,
-                'pageSize': 25,
                 'catalogIdList': [],
                 'paramNameValueMap': {},
                 'brandIdList': tmp[0],
