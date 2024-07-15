@@ -231,7 +231,7 @@ class ProxyService{
 
     async parse_catalogs() {
         const { status, data } = await axios.request({
-            url: 'https://wmsc.lcsc.com/wmsc/product/catalogs/search',
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/catalogs/search',
             method: 'get',
             headers: this.header,
             
