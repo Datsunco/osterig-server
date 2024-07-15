@@ -165,7 +165,6 @@ class ProxyService{
             method: 'post',
             headers: this.header,
             data: {
-                'catalogIdList': [],
                 'paramNameValueMap': {},
                 'brandIdList': tmp[0],
                 'isStock': false,
