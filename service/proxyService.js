@@ -110,7 +110,7 @@ class ProxyService{
             data: {
                 'currentPage': page,
                 'pageSize': 25,
-                'catalogIdList': [catalogId],
+                'catalogIdList': [],
                 'paramNameValueMap': {},
                 'brandIdList': tmp[0],
                 'isStock': false,
@@ -166,15 +166,9 @@ class ProxyService{
             method: 'post',
             headers: this.header,
             data: {
-                'currentPage': 1,
-                'pageSize': 25,
                 'catalogIdList': [],
-                'paramNameValueMap': {},
                 'brandIdList': tmp[0],
-                'isStock': false,
-                'isEnvironment': false,
                 'isHot': true,
-                'isDiscount': false,
                 'encapValueList': tmp[1],
             },
         });
