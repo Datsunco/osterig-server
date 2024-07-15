@@ -5,7 +5,18 @@ class ProxyController{
         try{
             const params = JSON.parse(req.params.selected);
             const catalogId = req.params.link;
-            const data = await proxyService.parse_data(catalogId, params)
+            const ishot = req.params.ishot
+            const data = await proxyService.parse_data(catalogId, params,  ishot)
+            return res.json(data)
+        } catch (e){
+            next(e)
+        }
+        
+    }
+
+    async parse_hotdata(req, res, next){
+        try{
+            const data = await proxyService.parse_data()
             return res.json(data)
         } catch (e){
             next(e)
@@ -30,7 +41,8 @@ class ProxyController{
         try{
             const params = JSON.parse(req.params.selected);
             const catalogId = req.params.link;
-            const data = await proxyService.parse_params(catalogId, params)
+            const ishot = req.params.ishot
+            const data = await proxyService.parse_params(catalogId, params, ishot)
             return res.json(data)
         } catch (e){
             next(e)

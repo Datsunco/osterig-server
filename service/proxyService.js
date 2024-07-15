@@ -37,9 +37,12 @@ class ProxyService{
 
     }
 
-    async parse_data(catalogId, params=[]) {
+    async parse_data(catalogId, params=[],ishot) {
         const tmp = this.parseParams(params)
         console.log(tmp)
+        let heds = {}
+        if (ishot === 1)
+            heds = {isHot: true}
         // const brandIdList = params[0].id
         
         const { status, data } = await axios.request({
@@ -57,7 +60,8 @@ class ProxyService{
                 'isHot': false,
                 'isDiscount': false,
                 'encapValueList': tmp[1]
-            }
+            },
+            ...heds
         });
 
         console.log
@@ -102,9 +106,14 @@ class ProxyService{
     }
 
 
-    async parse_params(catalogId, params = []) {
+    async parse_params(catalogId, params = [], ishot) {
         const tmp = this.parseParams(params)
         console.log(tmp)
+
+        let heds = {}
+        if (ishot === 1)
+            heds = {isHot: true}
+
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/param/group',
             method: 'post',
@@ -120,7 +129,8 @@ class ProxyService{
                 'isHot': false,
                 'isDiscount': false,
                 'encapValueList': tmp[1]
-            }
+            },
+            ...heds
         });
 
 	if (status !== 200) {
