@@ -59,12 +59,11 @@ class ProxyService{
                 'isEnvironment': false,
                 'isHot': false,
                 'isDiscount': false,
-                'encapValueList': tmp[1]
+                'encapValueList': tmp[1],
+                ...heds
             },
-            ...heds
+            
         });
-
-        console.log
 
 	if (status !== 200) {
             throw ApiError.BadRequest();
@@ -96,8 +95,6 @@ class ProxyService{
             }
         });
 
-        console.log
-
 	if (status !== 200) {
             throw ApiError.BadRequest();
         }
@@ -128,9 +125,9 @@ class ProxyService{
                 'isEnvironment': false,
                 'isHot': false,
                 'isDiscount': false,
-                'encapValueList': tmp[1]
+                'encapValueList': tmp[1],
+                ...heds
             },
-            ...heds
         });
 
 	if (status !== 200) {
