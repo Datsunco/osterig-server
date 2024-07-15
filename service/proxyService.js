@@ -37,12 +37,9 @@ class ProxyService{
 
     }
 
-    async parse_data(catalogId, params=[],ishot) {
+    async parse_data(catalogId, params=[]) {
         const tmp = this.parseParams(params)
-        console.log(tmp)
-        let heds = {}
-        if (ishot === 1)
-            heds = {isHot: true}
+
         // const brandIdList = params[0].id
         
         const { status, data } = await axios.request({
@@ -60,7 +57,6 @@ class ProxyService{
                 'isHot': false,
                 'isDiscount': false,
                 'encapValueList': tmp[1],
-                ...heds
             },
             
         });
@@ -102,14 +98,40 @@ class ProxyService{
         return data;
     }
 
-
-    async parse_params(catalogId, params = [], ishot) {
+    async parse_hot_parsebypage(params=[], page) {
         const tmp = this.parseParams(params)
         console.log(tmp)
+        // const brandIdList = params[0].id
+        
+        const { status, data } = await axios.request({
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
+            method: 'post',
+            headers: this.header,
+            data: {
+                'currentPage': page,
+                'pageSize': 25,
+                'catalogIdList': [catalogId],
+                'paramNameValueMap': {},
+                'brandIdList': tmp[0],
+                'isStock': false,
+                'isEnvironment': false,
+                'isHot': true,
+                'isDiscount': false,
+                'encapValueList': tmp[1]
+            }
+        });
 
-        let heds = {}
-        if (ishot === 1)
-            heds = {isHot: true}
+	if (status !== 200) {
+            throw ApiError.BadRequest();
+        }
+
+        return data;
+    }
+
+
+
+    async parse_params(catalogId, params = []) {
+        const tmp = this.parseParams(params)
 
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/param/group',
@@ -126,7 +148,34 @@ class ProxyService{
                 'isHot': false,
                 'isDiscount': false,
                 'encapValueList': tmp[1],
-                ...heds
+            },
+        });
+
+	if (status !== 200) {
+            throw ApiError.BadRequest();
+        }
+
+        return data;
+    }
+
+    async parse_hot_params(params = []) {
+        const tmp = this.parseParams(params)
+
+        const { status, data } = await axios.request({
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/search/param/group',
+            method: 'post',
+            headers: this.header,
+            data: {
+                'currentPage': 1,
+                'pageSize': 25,
+                'catalogIdList': [],
+                'paramNameValueMap': {},
+                'brandIdList': tmp[0],
+                'isStock': false,
+                'isEnvironment': false,
+                'isHot': true,
+                'isDiscount': false,
+                'encapValueList': tmp[1],
             },
         });
 
