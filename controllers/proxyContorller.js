@@ -51,6 +51,7 @@ class ProxyController{
     async parse_params(req, res, next){
         try{
             const params = JSON.parse(req.params.selected);
+            console.log(params)
             const catalogId = req.params.link;
             const data = await proxyService.parse_params(catalogId, params)
             return res.json(data)
