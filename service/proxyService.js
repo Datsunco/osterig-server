@@ -130,7 +130,7 @@ class ProxyService {
 
 
     async parse_params(catalogId, params = []) {
-        const tmp = this.parseParams(params)
+        const tmp = params
         
         let manufacturer = '';
         let packageName = '';
