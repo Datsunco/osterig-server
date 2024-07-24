@@ -38,7 +38,28 @@ class ProxyService {
     }
 
     async parse_data(catalogId, params = []) {
-        const tmp = this.parseParams(params)
+        // const tmp = this.parseParams(params)
+
+        const tmp = params
+        
+        let manufacturer = '';
+        let packageName = '';
+        let otherTypes = {};
+
+        tmp.forEach(item => {
+            if (item.type === 'Manufacturer') {
+                manufacturer = item.name;
+            } else if (item.type === 'Package') {
+                packageName = item.name;
+            } else {
+                otherTypes[item.type] = item.name;
+            }
+        });
+
+        console.log('manufacturer', manufacturer)
+        console.log('Package', packageName)
+        console.log('Other', otherTypes)
+
 
         // const brandIdList = params[0].id
 
@@ -50,13 +71,13 @@ class ProxyService {
                 'currentPage': 1,
                 'pageSize': 25,
                 'catalogIdList': [catalogId],
-                'paramNameValueMap': {},
-                'brandIdList': tmp[0],
+                'paramNameValueMap': otherTypes,
+                'brandIdList': [manufacturer],
                 'isStock': false,
                 'isEnvironment': false,
                 'isHot': false,
                 'isDiscount': false,
-                'encapValueList': tmp[1],
+                'encapValueList': [packageName],
             },
 
         });
@@ -158,13 +179,13 @@ class ProxyService {
                 'currentPage': 1,
                 'pageSize': 25,
                 'catalogIdList': [catalogId],
-                'paramNameValueMap': {},
-                'brandIdList': tmp[0],
+                'paramNameValueMap': otherTypes,
+                'brandIdList': [manufacturer],
                 'isStock': false,
                 'isEnvironment': false,
                 'isHot': false,
                 'isDiscount': false,
-                'encapValueList': tmp[1],
+                'encapValueList': [packageName],
             },
         });
 
