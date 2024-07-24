@@ -1,8 +1,8 @@
 const ApiError = require("../exceptions/apiError");
 const axios = require('axios');
 
-class ProxyService{
-    constructor(){
+class ProxyService {
+    constructor() {
         this.header = {
             'authority': 'wmsc.lcsc.com',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -23,13 +23,13 @@ class ProxyService{
     }
 
 
-    parseParams(params){
+    parseParams(params) {
         let manuf = []
         let pack = []
         params?.forEach(param => {
-            if (param?.id){
+            if (param?.id) {
                 manuf.push(param?.id)
-            }else{
+            } else {
                 pack.push(param?.name)
             }
         });
@@ -37,11 +37,11 @@ class ProxyService{
 
     }
 
-    async parse_data(catalogId, params=[]) {
+    async parse_data(catalogId, params = []) {
         const tmp = this.parseParams(params)
 
         // const brandIdList = params[0].id
-        
+
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
@@ -58,21 +58,21 @@ class ProxyService{
                 'isDiscount': false,
                 'encapValueList': tmp[1],
             },
-            
+
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
         return data;
     }
 
-    async parse_parsebypage(catalogId, params=[], page) {
+    async parse_parsebypage(catalogId, params = [], page) {
         const tmp = this.parseParams(params)
         console.log(tmp)
         // const brandIdList = params[0].id
-        
+
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
@@ -91,17 +91,17 @@ class ProxyService{
             }
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
         return data;
     }
 
-    async parse_hot_parsebypage(params=[], page) {
+    async parse_hot_parsebypage(params = [], page) {
         const tmp = this.parseParams(params)
         console.log(tmp)
-        
+
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
@@ -120,7 +120,7 @@ class ProxyService{
             }
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -131,6 +131,24 @@ class ProxyService{
 
     async parse_params(catalogId, params = []) {
         const tmp = this.parseParams(params)
+        
+        let manufacturer = '';
+        let package = '';
+        const otherTypes = {};
+
+        tmp.forEach(item => {
+            if (item.type === 'Manufacturer') {
+                manufacturer = item.name;
+            } else if (item.type === 'Package') {
+                package = item.name;
+            } else {
+                otherTypes[item.type] = item.name;
+            }
+        });
+
+        console.log('manufacturer', manufacturer)
+        console.log('Package', package)
+        console.log('Other', otherTypes)
 
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/param/group',
@@ -150,7 +168,7 @@ class ProxyService{
             },
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -175,7 +193,7 @@ class ProxyService{
             },
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -187,10 +205,10 @@ class ProxyService{
             url: `https://wmsc.lcsc.com/ftps/wm/product/detail?productCode=${productCode}`,
             method: 'get',
             headers: this.header,
-            
+
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -203,26 +221,26 @@ class ProxyService{
             https://wmsc.lcsc.com/wmsc/product/detail/other?productCode=${productCode}`,
             method: 'get',
             headers: this.header,
-            
+
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
         return data;
     }
-    
+
 
     async parse_hot() {
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/wmsc/home/index',
             method: 'get',
             headers: this.header,
-            
+
         });
 
-	if (status !== 200) {
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -234,11 +252,11 @@ class ProxyService{
             url: 'https://wmsc.lcsc.com/ftps/wm/product/catalogs/search',
             method: 'get',
             headers: this.header,
-            
+
         });
 
-	if (status !== 200) {
-        console.log('200 error detecct')//ytmp
+        if (status !== 200) {
+            console.log('200 error detecct')//ytmp
             throw ApiError.BadRequest();
         }
 
@@ -251,9 +269,9 @@ class ProxyService{
             method: 'get',
             headers: this.header
         });
-        
 
-	if (status !== 200) {
+
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -266,9 +284,9 @@ class ProxyService{
             method: 'get',
             headers: this.header
         });
-        
 
-	    if (status !== 200) {
+
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -281,9 +299,9 @@ class ProxyService{
             method: 'get',
             headers: this.header
         });
-        
 
-	    if (status !== 200) {
+
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
@@ -297,9 +315,9 @@ class ProxyService{
             method: 'get',
             headers: this.header
         });
-        
 
-	    if (status !== 200) {
+
+        if (status !== 200) {
             throw ApiError.BadRequest();
         }
 
