@@ -59,7 +59,6 @@ class ProxyService {
         console.log('request', {
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
-            headers: this.header,
             data: {
                 'currentPage': 1,
                 'pageSize': 25,
@@ -185,7 +184,6 @@ class ProxyService {
         console.log('request', {
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
-            headers: this.header,
             data: {
                 'currentPage': 1,
                 'pageSize': 25,
