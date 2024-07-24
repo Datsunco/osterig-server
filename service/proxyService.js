@@ -134,7 +134,7 @@ class ProxyService {
         
         let manufacturer = '';
         let package = '';
-        const otherTypes = {};
+        let otherTypes = {};
 
         tmp.forEach(item => {
             if (item.type === 'Manufacturer') {
