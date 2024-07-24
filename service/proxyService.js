@@ -56,9 +56,24 @@ class ProxyService {
             }
         });
 
-        console.log('manufacturer', manufacturer)
-        console.log('Package', packageName)
-        console.log('Other', otherTypes)
+        console.log('request', {
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
+            method: 'post',
+            headers: this.header,
+            data: {
+                'currentPage': 1,
+                'pageSize': 25,
+                'catalogIdList': [catalogId],
+                'paramNameValueMap': otherTypes,
+                'brandIdList': manufacturer,
+                'isStock': false,
+                'isEnvironment': false,
+                'isHot': false,
+                'isDiscount': false,
+                'encapValueList': packageName,
+            },
+
+        })
 
 
         // const brandIdList = params[0].id
@@ -167,9 +182,24 @@ class ProxyService {
             }
         });
 
-        console.log('manufacturer', manufacturer)
-        console.log('Package', packageName)
-        console.log('Other', otherTypes)
+        console.log('request', {
+            url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
+            method: 'post',
+            headers: this.header,
+            data: {
+                'currentPage': 1,
+                'pageSize': 25,
+                'catalogIdList': [catalogId],
+                'paramNameValueMap': otherTypes,
+                'brandIdList': manufacturer,
+                'isStock': false,
+                'isEnvironment': false,
+                'isHot': false,
+                'isDiscount': false,
+                'encapValueList': packageName,
+            },
+
+        })
 
         const { status, data } = await axios.request({
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/param/group',
