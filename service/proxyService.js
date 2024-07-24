@@ -42,15 +42,15 @@ class ProxyService {
 
         const tmp = params
         
-        let manufacturer = '';
-        let packageName = '';
+        let manufacturer = [];
+        let packageName = [];
         let otherTypes = {};
 
         tmp.forEach(item => {
             if (item.type === 'Manufacturer') {
-                manufacturer = item.name;
+                manufacturer = [item.name];
             } else if (item.type === 'Package') {
-                packageName = item.name;
+                packageName = [item.name];
             } else {
                 otherTypes[item.type] = item.name;
             }
@@ -72,12 +72,12 @@ class ProxyService {
                 'pageSize': 25,
                 'catalogIdList': [catalogId],
                 'paramNameValueMap': otherTypes,
-                'brandIdList': [manufacturer],
+                'brandIdList': manufacturer,
                 'isStock': false,
                 'isEnvironment': false,
                 'isHot': false,
                 'isDiscount': false,
-                'encapValueList': [packageName],
+                'encapValueList': packageName,
             },
 
         });
@@ -153,8 +153,8 @@ class ProxyService {
     async parse_params(catalogId, params = []) {
         const tmp = params
         
-        let manufacturer = '';
-        let packageName = '';
+        let manufacturer = [];
+        let packageName = [];
         let otherTypes = {};
 
         tmp.forEach(item => {
@@ -180,12 +180,12 @@ class ProxyService {
                 'pageSize': 25,
                 'catalogIdList': [catalogId],
                 'paramNameValueMap': otherTypes,
-                'brandIdList': [manufacturer],
+                'brandIdList': manufacturer,
                 'isStock': false,
                 'isEnvironment': false,
                 'isHot': false,
                 'isDiscount': false,
-                'encapValueList': [packageName],
+                'encapValueList': packageName,
             },
         });
 
