@@ -50,7 +50,7 @@ class ProxyService {
             if (item.type === 'Manufacturer') {
                 manufacturer = [item.name];
             } else if (item.type === 'Package') {
-                packageName = [item.name];
+                packageName = [item.id];
             } else {
                 otherTypes[item.type] = [item.name];
             }
@@ -159,7 +159,7 @@ class ProxyService {
 
         tmp.forEach(item => {
             if (item.type === 'Manufacturer') {
-                manufacturer = [item.name];
+                manufacturer = [item.id];
             } else if (item.type === 'Package') {
                 packageName = [item.name];
             } else {
