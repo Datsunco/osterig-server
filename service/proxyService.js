@@ -163,7 +163,7 @@ class ProxyService {
             } else if (item.type === 'Package') {
                 packageName = item.name;
             } else {
-                otherTypes[item.type] = item.name;
+                otherTypes[item.type] = [item.name];
             }
         });
 
