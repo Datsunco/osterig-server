@@ -133,21 +133,21 @@ class ProxyService {
         const tmp = this.parseParams(params)
         
         let manufacturer = '';
-        let package = '';
+        let packageName = '';
         let otherTypes = {};
 
         tmp.forEach(item => {
             if (item.type === 'Manufacturer') {
                 manufacturer = item.name;
             } else if (item.type === 'Package') {
-                package = item.name;
+                packageName = item.name;
             } else {
                 otherTypes[item.type] = item.name;
             }
         });
 
         console.log('manufacturer', manufacturer)
-        console.log('Package', package)
+        console.log('Package', packageName)
         console.log('Other', otherTypes)
 
         const { status, data } = await axios.request({
