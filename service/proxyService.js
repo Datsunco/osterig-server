@@ -38,24 +38,21 @@ class ProxyService {
     }
 
     async parse_data(catalogId, params = []) {
-        // const tmp = this.parseParams(params)
-
         const tmp = params
-        
+
         let manufacturer = [];
         let packageName = [];
         let otherTypes = {};
 
         tmp.forEach(item => {
             if (item.type === 'Manufacturer') {
-                manufacturer = [item.name];
+                manufacturer = [item.id];
             } else if (item.type === 'Package') {
-                packageName = [item.id];
+                packageName = [item.name];
             } else {
                 otherTypes[item.type] = [item.name];
             }
         });
-
         console.log('request', {
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
@@ -81,7 +78,7 @@ class ProxyService {
             url: 'https://wmsc.lcsc.com/ftps/wm/product/search/list',
             method: 'post',
             headers: this.header,
-            data: {
+            data:{
                 'currentPage': 1,
                 'pageSize': 25,
                 'catalogIdList': [catalogId],
