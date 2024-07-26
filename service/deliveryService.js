@@ -37,13 +37,12 @@ class DeliveryService {
                 method: 'POST',
                 mode: "cors",
                 headers: headers,
-                body: JSON.stringify({ lat, lon })
+                data: JSON.stringify({ lat, lon })
             });
 
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-            return data.suggestions;
             return data.suggestions;
         } catch (e) {
             console.log(e)
