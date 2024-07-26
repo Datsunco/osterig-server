@@ -19,7 +19,7 @@ class DevliveryController {
         try {
             const lat = req.params.lat;
             const lon = req.params.lon;
-            // const token = await deliveryService.getToken()
+            const token = await deliveryService.getToken()
             const postal = await deliveryService.getPostal(lat, lon)
             console.log('postal',postal)
             const data = await deliveryService.getDeliveryPoints(postal,token)
