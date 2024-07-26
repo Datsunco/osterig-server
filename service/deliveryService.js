@@ -43,7 +43,7 @@ class DeliveryService {
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-            return data.suggestions;
+            return data.suggestions?.[0].data.postal_code;
         } catch (e) {
             console.log(e)
         }
