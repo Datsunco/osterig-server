@@ -35,6 +35,7 @@ class DeliveryService {
             const { status, data } = await axios.request({
                 url: `http://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address`,
                 method: 'post',
+                mode: "cors",
                 headers: headers,
                 body: JSON.stringify({ lat, lon })
             });
