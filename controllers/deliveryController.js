@@ -22,7 +22,7 @@ class DevliveryController {
             const token = await deliveryService.getToken()
             const postal = await deliveryService.getPostal(lat, lon)
             console.log('postal',postal)
-            const data = await deliveryService.getDeliveryPoints(postal,token)
+            // const data = await deliveryService.getDeliveryPoints(postal,token)
             // console.log('points', data)
             return res.json(data)
         } catch (e) {
