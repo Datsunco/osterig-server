@@ -15,6 +15,18 @@ class DevliveryController {
         }
     }
 
+    async getDeliveryPoints(req, res, next) {
+        try {
+            const token = await deliveryService.getToken()
+            const data = await deliveryService.getTarrif( token)
+            console.log(data)
+            return res.json(data)
+        } catch (e) {
+            next(e)
+            
+        }
+    }
+
 }
 
 

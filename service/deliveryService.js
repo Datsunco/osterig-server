@@ -65,6 +65,28 @@ class DeliveryService {
         }
     }
 
+    async getDeliveryPoints(token) {
+        try {
+            var headers = {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": 'application/json'
+            };
+            
+            const { status, data } = await axios.request({
+                url: `https://api.cdek.ru/v2/deliverypoints`,
+                method: 'get',
+                headers: headers,
+            });
+
+            if (status !== 200) {
+                throw ApiError.BadRequest();
+            }
+            return data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 }
 
 module.exports = new DeliveryService();
