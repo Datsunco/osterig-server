@@ -4,6 +4,7 @@ const axios = require('axios');
 
 const client_id = process.env.CDEK_ID
 const client_secret = process.env.CDEK_SECRET
+const dada_key = process.env.DADA_KEY
 
 class DeliveryService {
     async getToken() {
@@ -18,6 +19,30 @@ class DeliveryService {
             }
         
             return data.access_token;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getPostal(lat, lon) {
+        try {
+            var headers = {
+                "Authorization": `Token  ${dada_key}`,
+                "Content-Type": 'application/json',
+                "Accept": "application/json",
+            };
+            
+            const { status, data } = await axios.request({
+                url: `http://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address`,
+                method: 'post',
+                headers: headers,
+                body: JSON.stringify({ lat, lon })
+            });
+
+            if (status !== 200) {
+                throw ApiError.BadRequest();
+            }
+            return data.suggestions?.[0].data.postal_code;
         } catch (e) {
             console.log(e)
         }
@@ -65,7 +90,7 @@ class DeliveryService {
         }
     }
 
-    async getDeliveryPoints(token) {
+    async getDeliveryPoints(postal, token) {
         try {
             var headers = {
                 "Authorization": `Bearer ${token}`,
@@ -76,6 +101,7 @@ class DeliveryService {
                 url: `https://api.cdek.ru/v2/deliverypoints`,
                 method: 'get',
                 headers: headers,
+                params: { postal_code: postal },
             });
 
             if (status !== 200) {

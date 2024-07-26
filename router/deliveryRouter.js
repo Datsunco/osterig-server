@@ -5,7 +5,7 @@ const deliveryController = require('../controllers/deliveryController');
 
 
 router.get('/get/:address', deliveryController.getTarrif);
-router.get('/deliverypoints', deliveryController.getDeliveryPoints);
+router.get('/deliverypoints/:lat/:lon', deliveryController.getDeliveryPoints);
 
 
 module.exports = router
