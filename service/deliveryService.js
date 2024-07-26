@@ -102,7 +102,7 @@ class DeliveryService {
                 url: `https://api.cdek.ru/v2/deliverypoints`,
                 method: 'get',
                 headers: headers,
-                params: { postal_code: postal },
+                // params: { postal_code: postal },
             });
 
             if (status !== 200) {
