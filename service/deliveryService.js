@@ -143,7 +143,7 @@ class DeliveryService {
                     "type": "2",
                     "date": "2020-11-03T11:49:32+0700",
                     "currency": "1",
-                    "tariff_code": `11`,
+                    "tariff_code": `138`,
                     "from_location": {
                         "code": 270
                     },
@@ -152,7 +152,7 @@ class DeliveryService {
                     },
                     "services": [
                         {
-                            "code": "CARTON_BOX_M"
+                            "code": "CARTON_BOX_XS"
                         }
                     ],
                     "packages": [
