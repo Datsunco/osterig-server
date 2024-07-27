@@ -171,7 +171,7 @@ class DeliveryService {
             }
             return data;
         } catch (e) {
-            console.log(e)
+            console.log(e.response.data)
         }
     }
 
