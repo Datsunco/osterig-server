@@ -34,7 +34,7 @@ class DeliveryService {
             };
             
             const { status, data } = await axios.request({
-                url: `"https://cleaner.dadata.ru/api/v1/clean/address"`,
+                url: `https://cleaner.dadata.ru/api/v1/clean/address`,
                 method: 'POST',
                 mode: "cors",
                 headers: headers,
