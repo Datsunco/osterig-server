@@ -24,6 +24,31 @@ class DeliveryService {
         }
     }
 
+    async getPostalByAddreess(address) {
+        try {
+            var headers = {
+                "Authorization": `Token  ${dada_key}`,
+                "Content-Type": 'application/json',
+                "Accept": "application/json",
+            };
+            
+            const { status, data } = await axios.request({
+                url: `"https://cleaner.dadata.ru/api/v1/clean/address"`,
+                method: 'POST',
+                mode: "cors",
+                headers: headers,
+                data: JSON.stringify([address])
+            });
+
+            if (status !== 200) {
+                throw ApiError.BadRequest();
+            }
+            return {postal_code: data?.[0].postal_code, cords: [data?.[0].geo_lat, data?.[0].geo_lon]};
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async getPostal(lat, lon) {
         try {
             var headers = {

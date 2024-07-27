@@ -15,6 +15,20 @@ class DevliveryController {
         }
     }
 
+    async getFeaturesByAddress(req, res, next) {
+        try {
+            const address = req.params.address;
+            const token = await deliveryService.getToken()
+            const geodata = await deliveryService.getPostalByAddreess(address)
+            const data = await deliveryService.getDeliveryPoints(geodata.postal_code,token)
+            console.log(data)
+            return res.json(data)
+        } catch (e) {
+            next(e)
+            
+        }
+    }
+
     async getDeliveryPoints(req, res, next) {
         try {
             const lat = req.params.lat;
