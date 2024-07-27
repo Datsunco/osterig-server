@@ -141,7 +141,6 @@ class DeliveryService {
                 headers: headers,
                 data: {
                     "type": "1",
-                    "date": "2020-11-03T11:49:32+0700",
                     "currency": "1",
                     "tariff_code": `${code}`,
                     "from_location": {
@@ -153,15 +152,11 @@ class DeliveryService {
                     "services": [
                         {
                             "code": "CARTON_BOX_M",
-                            "parameter": "2"
                         }
                     ],
                     "packages": [
                         {
-                            "height": 10,
-                            "length": 10,
                             "weight": 4000,
-                            "width": 10
                         }
                     ]
                 }
