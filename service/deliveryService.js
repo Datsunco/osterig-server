@@ -5,6 +5,7 @@ const axios = require('axios');
 const client_id = process.env.CDEK_ID
 const client_secret = process.env.CDEK_SECRET
 const dada_key = process.env.DADA_KEY
+const dada_secret = process.env.DADA_SECRET
 
 class DeliveryService {
     async getToken() {
@@ -29,7 +30,7 @@ class DeliveryService {
             var headers = {
                 "Authorization": `Token  ${dada_key}`,
                 "Content-Type": 'application/json',
-                "Accept": "application/json",
+                "X-Secret": dada_secret
             };
             
             const { status, data } = await axios.request({
