@@ -18,7 +18,7 @@ class DevliveryController {
     async getTariffByPoint(req, res, next) {
         try {
             const address = req.params.address;
-            const type = req.params.address;
+            const type = req.params.type;
             const token = await deliveryService.getToken()
             const data = await deliveryService.getTarrif(address, token)
 
