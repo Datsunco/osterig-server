@@ -140,7 +140,7 @@ class DeliveryService {
                 method: 'post',
                 headers: headers,
                 data: {
-                    "type": "2",
+                    "type": "1",
                     "date": "2020-11-03T11:49:32+0700",
                     "currency": "1",
                     "tariff_code": `138`,
