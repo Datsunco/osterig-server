@@ -28,15 +28,7 @@ class DevliveryController {
                 code = 138
             if (type === 'POSTAMAT')
                 code = 366
-            // switch(type){
-            //     case 'PVZ':
-            //         code = 138
-            //     case 'POSTAMAT':
-            //         code = 366
-
-            //     default:
-            //         code = 138
-            // }
+ 
             console.log("type",code, type)
             const tarrif = data.tariff_codes.find((item) => item.tariff_code === code)
             if (tarrif){
