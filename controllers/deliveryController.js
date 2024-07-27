@@ -20,7 +20,8 @@ class DevliveryController {
             const address = req.params.address;
             const type = req.params.address;
             const token = await deliveryService.getToken()
-            const data = await deliveryService.getTarrifByCode(address, type, token)
+            const data = await deliveryService.getTarrif(address, token)
+            // const data = await deliveryService.getTarrifByCode(address, type, token)
             console.log(data)
             return res.json(data)
             
