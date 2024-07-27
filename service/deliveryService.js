@@ -117,6 +117,65 @@ class DeliveryService {
         }
     }
 
+    async getTarrifByCode(address, type, token) {
+        try {
+            var headers = {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": 'application/json'
+            };
+
+            let code = 1
+            switch(type){
+                case 'PVZ':
+                    code = 138
+                case 'POSTOMAT':
+                    code = 366
+                    
+                default:
+                    code = 138
+            }
+            
+            const { status, data } = await axios.request({
+                url: `https://api.cdek.ru/v2/calculator/tariff`,
+                method: 'post',
+                headers: headers,
+                data: {
+                    "type": "2",
+                    "date": "2020-11-03T11:49:32+0700",
+                    "currency": "1",
+                    "tariff_code": code,
+                    "from_location": {
+                        "address": "Москва, ул. Михалковская, дом 63Б строение 1, офис 3/1"
+                    },
+                    "to_location": {
+                        "address": address
+                    },
+                    "services": [
+                        {
+                            "code": "CARTON_BOX_M",
+                            "parameter": "2"
+                        }
+                    ],
+                    "packages": [
+                        {
+                            "height": 10,
+                            "length": 10,
+                            "weight": 4000,
+                            "width": 10
+                        }
+                    ]
+                }
+            });
+
+            if (status !== 200) {
+                throw ApiError.BadRequest();
+            }
+            return data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async getDeliveryPoints(postal, token) {
         try {
             var headers = {
