@@ -124,16 +124,7 @@ class DeliveryService {
                 "Content-Type": 'application/json'
             };
 
-            let code = 138
-            switch(type){
-                case 'PVZ':
-                    code = 138
-                case 'POSTOMAT':
-                    code = 366
-
-                default:
-                    code = 138
-            }
+            
 
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/calculator/tariff`,

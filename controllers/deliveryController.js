@@ -21,9 +21,23 @@ class DevliveryController {
             const type = req.params.address;
             const token = await deliveryService.getToken()
             const data = await deliveryService.getTarrif(address, token)
-            // const data = await deliveryService.getTarrifByCode(address, type, token)
-            console.log(data)
-            return res.json(data)
+
+            let code = 138
+            switch(type){
+                case 'PVZ':
+                    code = 138
+                case 'POSTOMAT':
+                    code = 366
+
+                default:
+                    code = 138
+            }
+            const tarrif = data.tariff_codes.find((item) => item.tariff_code === code)
+            if (tarrif){
+                console.log(tarrif)
+                return res.json(tarrif)
+            }
+            return res.json({err: 'not found'})
             
             
         } catch (e) {
