@@ -152,7 +152,8 @@ class DeliveryService {
                     },
                     "services": [
                         {
-                            "code": "CARTON_BOX_XS"
+                            "code": "CARTON_BOX_M",
+                            "parameter": "2"
                         }
                     ],
                     "packages": [
