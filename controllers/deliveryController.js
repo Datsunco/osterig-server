@@ -22,16 +22,21 @@ class DevliveryController {
             const token = await deliveryService.getToken()
             const data = await deliveryService.getTarrif(address, token)
 
+
             let code = 138
+            // if (type === 'PVZ')
+            //     code = 138
+            // if (type === '')
             switch(type){
                 case 'PVZ':
                     code = 138
-                case 'POSTOMAT':
+                case 'POSTAMAT':
                     code = 366
 
                 default:
                     code = 138
             }
+            console.log("type",code, type)
             const tarrif = data.tariff_codes.find((item) => item.tariff_code === code)
             if (tarrif){
                 console.log(tarrif)
