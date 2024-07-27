@@ -125,15 +125,15 @@ class DeliveryService {
             };
 
             let code = 138
-            // switch(type){
-            //     case 'PVZ':
-            //         code = 138
-            //     case 'POSTOMAT':
-            //         code = 366
+            switch(type){
+                case 'PVZ':
+                    code = 138
+                case 'POSTOMAT':
+                    code = 366
 
-            //     default:
-            //         code = 138
-            // }
+                default:
+                    code = 138
+            }
 
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/calculator/tariff`,
@@ -143,12 +143,12 @@ class DeliveryService {
                     "type": "1",
                     "date": "2020-11-03T11:49:32+0700",
                     "currency": "1",
-                    "tariff_code": `138`,
+                    "tariff_code": `${code}`,
                     "from_location": {
-                        "code": 270
+                        "address": "Москва, ул. Михалковская, дом 63Б строение 1, офис 3/1"
                     },
                     "to_location": {
-                        "code": 44
+                        "address": `${address}`
                     },
                     "services": [
                         {
