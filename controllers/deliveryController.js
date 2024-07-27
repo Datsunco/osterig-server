@@ -21,8 +21,8 @@ class DevliveryController {
             const token = await deliveryService.getToken()
             const geodata = await deliveryService.getPostalByAddreess(address)
             const data = await deliveryService.getDeliveryPoints(geodata.postal_code,token)
-            console.log({...data, cords: geodata.cords})
-            return res.json({...data, cords: geodata.cords})
+            console.log({features: data, cords: geodata.cords})
+            return res.json({features: data, cords: geodata.cords})
         } catch (e) {
             next(e)
             
