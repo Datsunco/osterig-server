@@ -151,7 +151,7 @@ class DeliveryService {
                     },
                     "services": [
                         {
-                            "code": "CARTON_BOX_M",
+                            "code": "CARTON_BOX_XS",
                             "parameter": '1'
                         }
                     ],
