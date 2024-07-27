@@ -18,7 +18,7 @@ class DeliveryService {
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-        
+
             return data.access_token;
         } catch (e) {
             console.log(e)
@@ -32,7 +32,7 @@ class DeliveryService {
                 "Content-Type": 'application/json',
                 "X-Secret": dada_secret
             };
-            
+
             const { status, data } = await axios.request({
                 url: `https://cleaner.dadata.ru/api/v1/clean/address`,
                 method: 'POST',
@@ -44,7 +44,7 @@ class DeliveryService {
             if (status !== 200) {
                 throw ApiError.BadRequest();
             }
-            return {postal_code: data?.[0].postal_code, cords: [data?.[0].geo_lat, data?.[0].geo_lon]};
+            return { postal_code: data?.[0].postal_code, cords: [data?.[0].geo_lat, data?.[0].geo_lon] };
         } catch (e) {
             console.log(e)
         }
@@ -57,7 +57,7 @@ class DeliveryService {
                 "Content-Type": 'application/json',
                 "Accept": "application/json",
             };
-            
+
             const { status, data } = await axios.request({
                 url: `http://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address`,
                 method: 'POST',
@@ -75,13 +75,13 @@ class DeliveryService {
         }
     }
 
-    async getTarrif(address,token) {
+    async getTarrif(address, token) {
         try {
             var headers = {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": 'application/json'
             };
-            
+
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/calculator/tarifflist`,
                 method: 'post',
@@ -124,17 +124,17 @@ class DeliveryService {
                 "Content-Type": 'application/json'
             };
 
-            let code = 1
-            switch(type){
-                case 'PVZ':
-                    code = 138
-                case 'POSTOMAT':
-                    code = 366
-                    
-                default:
-                    code = 138
-            }
-            
+            let code = 138
+            // switch(type){
+            //     case 'PVZ':
+            //         code = 138
+            //     case 'POSTOMAT':
+            //         code = 366
+
+            //     default:
+            //         code = 138
+            // }
+
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/calculator/tariff`,
                 method: 'post',
@@ -143,17 +143,16 @@ class DeliveryService {
                     "type": "2",
                     "date": "2020-11-03T11:49:32+0700",
                     "currency": "1",
-                    "tariff_code": code,
+                    "tariff_code": `${code}`,
                     "from_location": {
-                        "address": "Москва, ул. Михалковская, дом 63Б строение 1, офис 3/1"
+                        "code": 270
                     },
                     "to_location": {
-                        "address": address
+                        "code": 44
                     },
                     "services": [
                         {
-                            "code": "CARTON_BOX_M",
-                            "parameter": "2"
+                            "code": "CARTON_BOX_M"
                         }
                     ],
                     "packages": [
@@ -182,7 +181,7 @@ class DeliveryService {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": 'application/json'
             };
-            
+
             const { status, data } = await axios.request({
                 url: `https://api.cdek.ru/v2/deliverypoints`,
                 method: 'get',
